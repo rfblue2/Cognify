@@ -27,4 +27,10 @@ public class Splash extends Activity	{
 		
 	}
 
+	@Override
+	protected void onPause() {
+		super.onPause();
+		finish();
+	}
+
 }
