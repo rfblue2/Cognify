@@ -10,6 +10,7 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
 import com.cognify.geometry.Shape;
+import com.cognify.geometry.Shape.SHAPE;
 
 import android.util.Xml;
 
@@ -40,7 +41,7 @@ public class LevelLoader {
 			
 			if(name.equals("shape"))
 			{
-				shapes.add(readEntry(parser))
+				shapes.add(readEntry(parser));
 			}
 			else
 				skip(parser);
@@ -54,8 +55,8 @@ public class LevelLoader {
 	
 	private Shape readEntry(XmlPullParser parser) throws XmlPullParserException, IOException{
 		String type = null;
-		String x = null;
-		String y = null;
+		int x = 0;
+		int y = 0;
 		
 		while(parser.next() != XmlPullParser.END_TAG)
 		{
@@ -68,14 +69,67 @@ public class LevelLoader {
 				x = readX(parser);
 			else if(name.equals("y"))
 				y = readY(parser);
+			else
+				skip(parser);
 			
 		}
 		
+		return new Shape(SHAPE.RECTANGLE, x, y, null, false);
 		
 		
+	}
+	
+	private String readType(XmlPullParser parser) throws XmlPullParserException, IOException{
+		parser.require(XmlPullParser.START_TAG, null, "type");
+		String type = readText(parser);
+		parser.require(XmlPullParser.END_TAG, null, "type");
+		return type;
+	}
+	
+	private int readX(XmlPullParser parser) throws XmlPullParserException, IOException{
+		parser.require(XmlPullParser.START_TAG, null, "x");
+		String x= readText(parser);
+		parser.require(XmlPullParser.END_TAG, null, "x");
+		return Integer.parseInt(x);
 		
-		return null;
+	}
+	
+	private int readY(XmlPullParser parser) throws XmlPullParserException, IOException{
+		parser.require(XmlPullParser.START_TAG, null, "y");
+		String y= readText(parser);
+		parser.require(XmlPullParser.END_TAG, null, "y");
+		return Integer.parseInt(y);
 		
+	}
+	
+	private String readText(XmlPullParser parser) throws XmlPullParserException, IOException{
+		String result = "";
+		if(parser.next() == XmlPullParser.TEXT)
+		{
+			result = parser.getText();
+			parser.nextTag();
+		}
+		
+		return result;
+	}
+	
+	private void skip(XmlPullParser parser) throws XmlPullParserException, IOException{
+		if(parser.getEventType() != XmlPullParser.START_TAG)
+			throw new IllegalStateException();
+		
+		int depth = 1;
+		while(depth != 0)
+		{
+			switch(parser.next())
+			{
+			case XmlPullParser.END_TAG:
+				depth--;
+				break;
+			case XmlPullParser.START_TAG:
+				depth++;
+				break;
+			}
+		}
 	}
 	
 
