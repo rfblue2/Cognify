@@ -1,4 +1,4 @@
-package com.example.cognify;
+package com.cognify.main;
 
 import android.os.Bundle;
 import android.app.Activity;
