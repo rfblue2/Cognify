@@ -35,11 +35,18 @@ public final class R {
         public static final int triangle_right_blue=0x7f02000b;
     }
     public static final class id {
-        public static final int action_settings=0x7f080000;
+        public static final int action_settings=0x7f080005;
+        public static final int bAbout=0x7f080004;
+        public static final int bPlay=0x7f080002;
+        public static final int bPrefs=0x7f080003;
+        public static final int textView1=0x7f080000;
+        public static final int tvTitle=0x7f080001;
     }
     public static final class layout {
-        public static final int activity_main=0x7f030000;
-        public static final int splash=0x7f030001;
+        public static final int about=0x7f030000;
+        public static final int activity_main=0x7f030001;
+        public static final int level_menu=0x7f030002;
+        public static final int splash=0x7f030003;
     }
     public static final class menu {
         public static final int main=0x7f070000;
