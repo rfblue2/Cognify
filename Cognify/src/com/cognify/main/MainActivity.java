@@ -2,6 +2,8 @@ package com.cognify.main;
 
 import java.io.IOException;
 
+import com.cognify.loader.LevelLoader;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.res.AssetManager;
@@ -11,22 +13,13 @@ import android.view.Menu;
 public class MainActivity extends Activity {
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	protected void onCreate(Bundle savedInstanceState) { 
 		super.onCreate(savedInstanceState);
+		Log.v("test", "help");
 		setContentView(R.layout.activity_main);
+		LevelLoader lvl = new LevelLoader(this);
 		
-		AssetManager assetManager = getAssets();
-		 // To get names of all files inside the "Files" folder
-		  try {
-		   String[] files = assetManager.list("Files");
-
-		   for(int i=0; i<files.length; i++){
-			   Log.d("files", files[i]);
-		   }
-		  } catch (IOException e1) {
-		   // TODO Auto-generated catch block
-		   e1.printStackTrace();
-		  }
+				
 	}
 
 	@Override

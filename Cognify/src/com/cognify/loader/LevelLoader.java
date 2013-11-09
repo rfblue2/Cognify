@@ -12,13 +12,47 @@ import org.xmlpull.v1.XmlPullParserException;
 import com.cognify.geometry.Shape;
 import com.cognify.geometry.Shape.SHAPE;
 
+import android.content.Context;
+import android.content.res.AssetManager;
+import android.util.Log;
 import android.util.Xml;
 
 public class LevelLoader {
 	File xmlFile;
+	Context context;
 	
+	public LevelLoader(Context context)
+	{
+		this.context = context;
+		AssetManager assetManager = context.getAssets(); 
+		 // To get names of all files inside the "Files" folder
+		  try {
+		   String[] files = assetManager.list("levels");
+		   
+		   Log.v("num files", ""+files.length);
+		   
+		   for(int i=0; i<files.length; i++){
+			   Log.d("files", files[i]);
+		   }
+		  } catch (IOException e1) {
+		   e1.printStackTrace();
+		  }
+		  
+		  
+		try {
+			this.parse(assetManager.open("levels/test.xml"));
+		} catch (XmlPullParserException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	public List parse(InputStream in) throws XmlPullParserException, IOException{
+		Log.v("parser", "started");
 		try{
+			
 			XmlPullParser parser = Xml.newPullParser();
 			parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
 			parser.setInput(in, null);
@@ -30,17 +64,20 @@ public class LevelLoader {
 		
 	}
 	
-	private List readFeed(XmlPullParser parser) throws XmlPullParserException, IOException{
-		List shapes = new ArrayList();
+	private List<Shape> readFeed(XmlPullParser parser) throws XmlPullParserException, IOException{
+		List<Shape> shapes = new ArrayList<Shape>();
+		//Log.v("feed", "reading");
 		
 		while(parser.next() != XmlPullParser.END_TAG)
 		{
+			//Log.v("feed", "continuing");
 			if(parser.getEventType() != XmlPullParser.START_TAG)
 				continue;
 			String name = parser.getName();
 			
 			if(name.equals("shape"))
 			{
+				//Log.v("feed", "name is shape");
 				shapes.add(readEntry(parser));
 			}
 			else
@@ -63,6 +100,7 @@ public class LevelLoader {
 			if(parser.getEventType() != XmlPullParser.START_TAG)
 				continue;
 			String name = parser.getName();
+			Log.v("reading entry", name);
 			if(name.equals("type"))
 				type = readType(parser);
 			else if (name.equals("x"))
