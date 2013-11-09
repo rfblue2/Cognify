@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <level>	
-	<shape type = "rect" x="100" y="100" >
+	<shape blob = "rect" x1="100" y1="100" >
+		<type>Rect</type>
 		<x>300</x>
+		<y>150</y>
 	</shape>
 	
-	<shape type="rect">
+	<shape blob="rect">
+		<type>Rect</type>
 		 <x>200</x>
 		 <y>100</y>
 	</shape>

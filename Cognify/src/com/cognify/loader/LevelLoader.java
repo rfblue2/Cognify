@@ -9,6 +9,8 @@ import java.util.List;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
+import com.cognify.geometry.Shape;
+
 import android.util.Xml;
 
 public class LevelLoader {
@@ -49,6 +51,32 @@ public class LevelLoader {
 	
 	//entries in theirs = shapes in ours
 	
+	
+	private Shape readEntry(XmlPullParser parser) throws XmlPullParserException, IOException{
+		String type = null;
+		String x = null;
+		String y = null;
+		
+		while(parser.next() != XmlPullParser.END_TAG)
+		{
+			if(parser.getEventType() != XmlPullParser.START_TAG)
+				continue;
+			String name = parser.getName();
+			if(name.equals("type"))
+				type = readType(parser);
+			else if (name.equals("x"))
+				x = readX(parser);
+			else if(name.equals("y"))
+				y = readY(parser);
+			
+		}
+		
+		
+		
+		
+		return null;
+		
+	}
 	
 
 }

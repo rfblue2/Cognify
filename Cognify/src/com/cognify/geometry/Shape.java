@@ -16,8 +16,8 @@ public class Shape {
 	public enum DIR	{UP, DOWN, LEFT, RIGHT};
 	public enum SHAPE {RECTANGLE, CIRCLE, TRIANGLE_RIGHT, TRIANGLE_ISO, TRIANGLE_EQU};
 	
-	public Shape(String src, SHAPE shape, Color c, boolean hole)	{
-		imgSrc = src;
+	public Shape(SHAPE shape, int x, int y, Color c, boolean hole)	{
+		//imgSrc = src;
 		bmp = BitmapFactory.decodeFile(imgSrc);
 		this.hole = hole;
 		this.c = c;
