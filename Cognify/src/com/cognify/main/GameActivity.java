@@ -157,12 +157,14 @@ public class GameActivity extends Activity implements OnTouchListener {
 
 	public class MySurfaceView extends SurfaceView implements Runnable {
 
+		Context context;
 		Thread t = null;
 		SurfaceHolder holder;
 		boolean valid = false;
 
 		public MySurfaceView(Context context) {
 			super(context);
+			this.context = context;
 			holder = getHolder();
 
 		}
@@ -238,7 +240,10 @@ public class GameActivity extends Activity implements OnTouchListener {
 									+ shapes.get(n).getBmp().getHeight());
 				}
 				if (checkCompletion()) {
-					nextLevel();
+					Intent j = new Intent(context, NextLevel.class);
+					j.putExtra("lvl", currentLevel);
+					startActivityForResult(j, 0);
+					//nextLevel();
 				}
 				holder.unlockCanvasAndPost(c);
 			}
@@ -353,5 +358,14 @@ public class GameActivity extends Activity implements OnTouchListener {
 			t.printStackTrace();
 		}
 		return true;
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if(resultCode == RESULT_OK)	{
+			Log.v("mgs", "RESULTOK");
+			nextLevel();
+		}
 	}
 }

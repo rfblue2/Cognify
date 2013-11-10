@@ -66,6 +66,11 @@
             android:theme="@android:style/Theme.Dialog">
         </activity>
         
+        <activity
+            android:name="com.cognify.main.NextLevel"
+            android:theme="@android:style/Theme.Dialog">
+        </activity>
+        
     </application>
 
 </manifest>
