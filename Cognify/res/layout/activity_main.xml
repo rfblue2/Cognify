@@ -9,8 +9,36 @@
     tools:context=".MainActivity" >
 
     <TextView
+        android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/bPlay"
+        android:text="Cognify"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Button
+        android:id="@id/bPlay"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/bPrefs"
+        android:layout_centerHorizontal="true"
+        android:text="Play" />
+
+    <Button
+        android:id="@id/bPrefs"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"
+        android:text="Preferences" />
+
+    <Button
+        android:id="@+id/bAbout"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/bPrefs"
+        android:layout_centerHorizontal="true"
+        android:text="About" />
 
 </RelativeLayout>
