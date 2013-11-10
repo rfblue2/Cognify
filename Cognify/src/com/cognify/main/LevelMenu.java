@@ -32,10 +32,11 @@ public class LevelMenu extends Activity implements OnClickListener{
 	public void addLevelButtons(){
 		
 		 
-		LinearLayout mainLayout = (LinearLayout)findViewById(R.id.main_level_layout);		
+		LinearLayout mainLayout = (LinearLayout)findViewById(R.id.main_level_layout);	
+		mainLayout.setPadding(50, 50, 50, 50);
 		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
 		params.weight = 1;
-		params.setMargins(20, 20, 20, 20);
+		params.setMargins(10, 10, 10, 10);
 		
 		
 		int lNum = 1;//level number
@@ -46,14 +47,18 @@ public class LevelMenu extends Activity implements OnClickListener{
 			
 			
 			
-			for(int j=1; j<6; j++)
+			for(int j=1; j<5; j++)
 			{
 				Button temp = new Button(this); 
 				
 				temp.setText("Lvl"+lNum);
 				temp.setTag(lNum);
+				temp.setSingleLine(true);
+				temp.setPadding(30, 30, 30, 30);
 				temp.setBackgroundResource(R.drawable.level_button_back);
 				temp.setLayoutParams(params);
+				
+				
 				
 				temp.setOnClickListener(this);
 				 
@@ -72,6 +77,7 @@ public class LevelMenu extends Activity implements OnClickListener{
 
 		LevelLoader levelLoader = new LevelLoader(this);
 		levelLoader.loadLevel((Integer) temp.getTag());
+		
 	}
 
 }
