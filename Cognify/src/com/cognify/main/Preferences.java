@@ -11,16 +11,19 @@ import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.ToggleButton;
 
 public class Preferences extends Activity{
-	MediaPlayer player = null;
+	static MediaPlayer player = null;
 	ToggleButton musicToggle;
 	RadioGroup musicGroup;
 	int currentMusic = R.raw.passion;
-	boolean playing = false;
+	
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) { 
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.preferences);
+		
+		//player = MediaPlayer.create(Preferences.this, currentMusic);
 		
 		musicToggle = (ToggleButton)findViewById(R.id.musicToggle);
 		musicToggle.setOnClickListener(new OnClickListener(){
@@ -31,13 +34,12 @@ public class Preferences extends Activity{
 				{
 					player = MediaPlayer.create(Preferences.this, currentMusic);
 					player.start();
-					playing = true;
 				}
 				else
 				{
-					player.stop();
+					if(player.isPlaying())
+						player.stop();
 					player = null;
-					playing = false;
 				}
 					 
 			}
@@ -53,7 +55,7 @@ public class Preferences extends Activity{
 					
 					if(player != null)
 						player.stop();
-					if(playing)
+					if(player.isPlaying())
 					{
 						player = MediaPlayer.create(Preferences.this, currentMusic);
 						player.start();
@@ -64,7 +66,7 @@ public class Preferences extends Activity{
 					currentMusic = R.raw.passion;
 					if(player != null)
 						player.stop();
-					if(playing)
+					if(player.isPlaying())
 					{
 						player = MediaPlayer.create(Preferences.this, currentMusic);
 						player.start();

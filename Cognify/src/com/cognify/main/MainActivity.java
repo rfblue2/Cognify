@@ -68,5 +68,33 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		}
 		
 	}
+	
+	@Override
+	public void onPause(){
+		super.onPause();
+		Log.d("calling", "pausing");
+	}
+	
+	@Override
+	public void onStop(){
+		super.onStop();
+		Log.d("calling", "stoppping");
+	}
+	
+	
 
+	@Override
+	protected void onDestroy(){
+
+		super.onDestroy();
+		Log.d("calling", "destroying");
+		if(this.isFinishing())
+			if(Preferences.player != null)
+			{
+				Preferences.player.stop();
+				Preferences.player.release();
+			}
+		
+	}
+	
 }
