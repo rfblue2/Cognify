@@ -2,170 +2,29 @@
 
 <level>
 	<shape>
-		<type>arrow</type>
-		<x>450</x>
-		<y>600</y>
+		<type>square</type>
+		<x>250</x>
+		<y>400</y>
 		<hole>true</hole>
 	</shape>
 
 	<shape>
-		<type>arrow</type>
+		<type>square</type>
 		 <x>450</x>
-		 <y>750</y>
-	</shape>
-	<shape>
-		<type>circle</type>
-		<x>400</x>
-		<y>600</y>
-		<hole>true</hole>
-	</shape>
-
-	<shape>
-		<type>circle</type>
-		 <x>400</x>
-		 <y>750</y>
-	</shape>
-
-	<shape>
-		<type>hexagon</type>
-		<x>350</x>
-		<y>600</y>
-		<hole>true</hole>
-	</shape>
-
-	<shape>
-		<type>hexagon</type>
-		 <x>350</x>
-		 <y>750</y>
-	</shape>
-
-	<shape>
-		<type>octagon</type>
-		<x>300</x>
-		<y>600</y>
-		<hole>true</hole>
-	</shape>
-
-	<shape>
-		<type>octagon</type>
-		 <x>300</x>
-		 <y>750</y>
-	</shape>
-
-	<shape>
-		<type>oval</type>
-		<x>500</x>
-		<y>600</y>
-		<hole>true</hole>
-	</shape>
-
-	<shape>
-		<type>oval</type>
-		 <x>500</x>
-		 <y>750</y>
-	</shape>
-
-	<shape>
-		<type>pentagon</type>
-		<x>550</x>
-		<y>600</y>
-		<hole>true</hole>
-	</shape>
-
-	<shape>
-		<type>pentagon</type>
-		 <x>550</x>
-		 <y>750</y>
-	</shape>
-
-
-	<shape>
-		<type>rectangle</type>
-		<x>600</x>
-		<y>600</y>
-		<hole>true</hole>
+		 <y>600</y>
 	</shape>
 	
 	<shape>
-		<type>rectangle</type>
-		 <x>600</x>
-		 <y>750</y>
-	</shape>
-
-	<shape>
-		<type>rhombus</type>
-		<x>650</x>
-		<y>600</y>
-		<hole>true</hole>
-	</shape>
-
-	<shape>
-		<type>rhombus</type>
-		 <x>650</x>
-		 <y>750</y>
-	</shape>
-
-	<shape>
-		<type>square</type>
+		<type>triangle</type>
 		<x>450</x>
-		<y>500</y>
+		<y>400</y>
 		<hole>true</hole>
 	</shape>
 
 	<shape>
-		<type>square</type>
-		 <x>450</x>
-		 <y>850</y>
+		<type>triangle</type>
+		 <x>250</x>
+		 <y>600</y>
 	</shape>
 
-	<shape>
-		<type>star</type>
-		<x>400</x>
-		<y>500</y>
-		<hole>true</hole>
-	</shape>
-
-	<shape>
-		<type>star</type>
-		 <x>400</x>
-		 <y>850</y>
-	</shape>
-
-	<shape>
-		<type>trapezoid</type>
-		<x>350</x>
-		<y>500</y>
-		<hole>true</hole>
-	</shape>
-
-	<shape>
-		<type>trapezoid</type>
-		 <x>350</x>
-		 <y>850</y>
-	</shape>
-	<shape>
-		<type>triangle_equal</type>
-		<x>300</x>
-		<y>500</y>
-		<hole>true</hole>
-	</shape>
-
-	<shape>
-		<type>triangle_equal</type>
-		 <x>300</x>
-		 <y>850</y>
-	</shape>
-
-	<shape>
-		<type>triangle_right</type>
-		<x>500</x>
-		<y>500</y>
-		<hole>true</hole>
-	</shape>
-
-	<shape>
-		<type>triangle_right</type>
-		 <x>500</x>
-		 <y>850</y>
-	</shape>
 </level>
