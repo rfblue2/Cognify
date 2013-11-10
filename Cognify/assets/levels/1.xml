@@ -1,16 +1,18 @@
-<?xml version="1.0" encoding="utf-8"?>
-<level>	
-	<shape>
-		<type>Rect</type>
-		<x>300</x>
-		<y>150</y>
-		<hole>true</hole>
-	</shape>
+<?xml version="1.0" encoding="UTF-8"?>
+
 	
+<level>
 	<shape>
-		<type>Rect</type>
-		 <x>400</x>
-		 <y>600</y>
+		<type>square</type>
+		<x>450</x>
+		<y>600</y>
+<hole>true</hole>
 	</shape>
 
+	<shape>
+		<type>square</type>
+		 <x>450</x>
+		 <y>750</y>
+	</shape>
 </level>
+
