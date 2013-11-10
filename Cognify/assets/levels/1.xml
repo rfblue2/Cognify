@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<level>	
-<level1>
+	
+<level>
 	<shape>
 		<type>square</type>
 		<x>450</x>
 		<y>600</y>
 <hole>true</hole>
-	<shape>
+	</shape>
 
 	<shape>
 		<type>square</type>
 		 <x>450</x>
 		 <y>750</y>
 	</shape>
-</level1>
+</level>
 
