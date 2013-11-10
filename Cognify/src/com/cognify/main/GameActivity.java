@@ -210,10 +210,10 @@ public class GameActivity extends Activity implements OnTouchListener {
 						if ( shapes.get(y).isHole() || (shapes.get(y).getShape() != onlyHoles.get(x).getShape()) )
 								continue;
 						else {							
-							if ( shapes.get(y).getPosX() - onlyHoles.get(x).getPosX() <= 5 && 
-									shapes.get(y).getPosX() - onlyHoles.get(x).getPosX() >= -5 && 
-									shapes.get(y).getPosY() - onlyHoles.get(x).getPosY() <= 5 &&
-									shapes.get(y).getPosY() - onlyHoles.get(x).getPosY() >= -5) {
+							if ( shapes.get(y).getPosX() - onlyHoles.get(x).getPosX() <= 25 && 
+									shapes.get(y).getPosX() - onlyHoles.get(x).getPosX() >= -25 && 
+									shapes.get(y).getPosY() - onlyHoles.get(x).getPosY() <= 25 &&
+									shapes.get(y).getPosY() - onlyHoles.get(x).getPosY() >= -25) {
 									holeClear.set(x, true);
 									transform.get(y).reset();
 									transform.get(y).postTranslate(onlyHoles.get(x).getPosX(), onlyHoles.get(x).getPosY());
