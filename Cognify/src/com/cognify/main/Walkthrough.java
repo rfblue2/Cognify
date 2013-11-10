@@ -17,7 +17,7 @@ public class Walkthrough extends Activity	{
 		setContentView(R.layout.walkthrough);
 		txt = (TextView) findViewById(R.id.tvWalkTxt);
 		Bundle extras =  getIntent().getExtras();
-		level = extras.getInt("lvl");
+		level = extras.getInt("lvl"); 
 		
 		switch(level)	{
 		case 1:
