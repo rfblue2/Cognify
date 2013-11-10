@@ -10,15 +10,16 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.ToggleButton;
 
 public class Preferences extends Activity{
 	static MediaPlayer player = null;
-	Button musicToggle;
+	ToggleButton musicToggle;
 	RadioGroup musicGroup;
-	int currentMusic = R.raw.passion;
+	static int currentMusic = R.raw.passion;
 	
 	
 	
@@ -29,7 +30,10 @@ public class Preferences extends Activity{
 		
 		//player = MediaPlayer.create(Preferences.this, currentMusic);
 		
-		musicToggle = (Button)findViewById(R.id.musicToggle);
+		musicToggle = (ToggleButton)findViewById(R.id.musicToggle);
+		if(player != null)
+			if(player.isPlaying())
+				musicToggle.setChecked(true);
 		musicToggle.setOnClickListener(new OnClickListener(){
 			
 			@Override
@@ -50,6 +54,13 @@ public class Preferences extends Activity{
 		});
 		
 		musicGroup = (RadioGroup)findViewById(R.id.musicGroup);
+		RadioButton peaceRadio = (RadioButton) findViewById(R.id.peaceRadio);
+		RadioButton exciteRadio = (RadioButton) findViewById(R.id.exciteRadio);
+		
+		if(currentMusic == R.raw.passion)
+			peaceRadio.setChecked(true);
+		else
+			exciteRadio.setChecked(true);
 		musicGroup.setOnCheckedChangeListener(new OnCheckedChangeListener(){
 			
 			public void onCheckedChanged(RadioGroup group, int checkId){
