@@ -1,18 +1,22 @@
 package com.cognify.main;
 
+import com.cognify.loader.PlayAudio;
+
 import android.app.Activity;
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.ToggleButton;
 
 public class Preferences extends Activity{
 	static MediaPlayer player = null;
-	ToggleButton musicToggle;
+	Button musicToggle;
 	RadioGroup musicGroup;
 	int currentMusic = R.raw.passion;
 	
@@ -25,7 +29,7 @@ public class Preferences extends Activity{
 		
 		//player = MediaPlayer.create(Preferences.this, currentMusic);
 		
-		musicToggle = (ToggleButton)findViewById(R.id.musicToggle);
+		musicToggle = (Button)findViewById(R.id.musicToggle);
 		musicToggle.setOnClickListener(new OnClickListener(){
 			
 			@Override
@@ -52,25 +56,14 @@ public class Preferences extends Activity{
 				if(checkId == R.id.exciteRadio)
 				{
 					currentMusic = R.raw.excite;
-					
-					if(player != null)
-						player.stop();
-					if(player.isPlaying())
-					{
-						player = MediaPlayer.create(Preferences.this, currentMusic);
-						player.start();
-					}
+					Intent mediaIntent = new Intent(Preferences.this, PlayAudio.class);
+					startService(mediaIntent);
 				}
 				else
 				{
 					currentMusic = R.raw.passion;
-					if(player != null)
-						player.stop();
-					if(player.isPlaying())
-					{
-						player = MediaPlayer.create(Preferences.this, currentMusic);
-						player.start();
-					}
+					Intent mediaIntent = new Intent(Preferences.this, PlayAudio.class);
+					stopService(mediaIntent);
 				}
 			}
 			
