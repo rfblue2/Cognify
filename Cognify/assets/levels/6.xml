@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<level>
+	<shape>
+		<type>star</type>
+		<x>350</x>
+		<y>400</y>
+		<hole>true</hole>
+	</shape>
+
+	<shape>
+		<type>star</type>
+		 <x>650</x>
+		 <y>800</y>
+	</shape>
+	
+	<shape>
+		<type>trapezoid</type>
+		<x>500</x>
+		<y>400</y>
+		<hole>true</hole>
+	</shape>
+
+	<shape>
+		<type>trapezoid</type>
+		 <x>350</x>
+		 <y>800</y>
+	</shape>
+	
+	<shape>
+		<type>pentagon</type>
+		<x>650</x>
+		<y>400</y>
+		<hole>true</hole>
+	</shape>
+
+	<shape>
+		<type>pentagon</type>
+		 <x>500</x>
+		 <y>800</y>
+	</shape>
+	<shape>
+		<type>square</type>
+		<x>350</x>
+		<y>600</y>
+		<hole>true</hole>
+	</shape>
+	<shape>
+		<type>square</type>
+		 <x>500</x>
+		 <y>1000</y>
+	</shape>
+	<shape>
+		<type>triangle_equal</type>
+		<x>650</x>
+		<y>600</y>
+		<hole>true</hole>
+	</shape>
+
+	<shape>
+		<type>triangle_equal</type>
+		 <x>650</x>
+		 <y>1000</y>
+	</shape>
+	
+	<shape>
+		<type>arrow</type>
+		<x>500</x>
+		<y>600</y>
+		<hole>true</hole>
+	</shape>
+
+	<shape>
+		<type>arrow</type>
+		 <x>350</x>
+		 <y>1000</y>
+	</shape>
+
+</level>
