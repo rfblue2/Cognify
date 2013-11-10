@@ -11,8 +11,10 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import com.cognify.geometry.Shape;
 import com.cognify.geometry.Shape.SHAPE;
+import com.cognify.main.GameActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.AssetManager;
 import android.util.Log;
 import android.util.Xml;
@@ -20,11 +22,14 @@ import android.util.Xml;
 public class LevelLoader {
 	File xmlFile;
 	Context context;
+	AssetManager assetManager;
+	static GameActivity game;
 	
-	public LevelLoader(Context context)
+	public LevelLoader(GameActivity game)
 	{
-		this.context = context;
-		AssetManager assetManager = context.getAssets(); 
+		this.context = game.getApplicationContext();
+		this.game = game;
+		assetManager = context.getAssets(); 
 		 // To get names of all files inside the "Files" folder
 		  try {
 		   String[] files = assetManager.list("levels");
@@ -38,7 +43,7 @@ public class LevelLoader {
 		   e1.printStackTrace();
 		  }
 		  
-		  
+		/*  
 		try {
 			this.parse(assetManager.open("levels/test.xml"));
 		} catch (XmlPullParserException e) {
@@ -47,8 +52,24 @@ public class LevelLoader {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 	}
+	
+	public void loadLevel(int num){
+		try {
+			this.parse(assetManager.open("levels/"+num+".xml"));
+		} catch (XmlPullParserException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		//Intent i = new Intent(context, GameActivity.class);
+		//context.startActivity(i);
+	}
+	
 	public List parse(InputStream in) throws XmlPullParserException, IOException{
 		Log.v("parser", "started");
 		try{
@@ -89,7 +110,6 @@ public class LevelLoader {
 	
 	//entries in theirs = shapes in ours
 	
-	
 	private Shape readEntry(XmlPullParser parser) throws XmlPullParserException, IOException{
 		String type = null;
 		int x = 0;
@@ -111,9 +131,10 @@ public class LevelLoader {
 				skip(parser);
 			
 		}
-		
-		return new Shape(SHAPE.RECTANGLE, x, y, null, false);
-		
+		Shape tempShape = new Shape(SHAPE.SQUARE, x, y, Shape.COLOR.BLUE, false, context);
+		Log.v("msg", "SHAPE X: "+tempShape.getPosX()); 
+		game.drawShapes(tempShape);
+		return tempShape;
 		
 	}
 	

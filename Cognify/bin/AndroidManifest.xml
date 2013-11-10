@@ -33,6 +33,11 @@
         </activity>
         
         <activity
+            android:name="com.cognify.main.LevelMenu">
+            
+        </activity>
+        
+        <activity
             android:name="com.cognify.main.About"
             android:theme="@android:style/Theme.Dialog" >
             <intent-filter>
@@ -41,6 +46,10 @@
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+        </activity>
+        
+        <activity
+            android:name="com.cognify.main.GameActivity">
         </activity>
         
     </application>

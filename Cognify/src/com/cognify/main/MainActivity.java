@@ -32,7 +32,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		play.setOnClickListener(this);
 		prefs.setOnClickListener(this);
 		about.setOnClickListener(this);
-		LevelLoader lvl = new LevelLoader(this);
 		
 	}
 
@@ -47,9 +46,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	public void onClick(View v) {
 		switch(v.getId())	{
 		case R.id.bPlay:
-			
+			Intent menuLevelIntent = new Intent(this, LevelMenu.class);
+			startActivity(menuLevelIntent);
 			break;
-		case R.id.bPrefs:
+		case R.id.bPrefs: 
 			
 			break;
 		case R.id.bAbout:
