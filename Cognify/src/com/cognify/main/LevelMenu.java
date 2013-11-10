@@ -3,6 +3,7 @@ package com.cognify.main;
 import com.cognify.loader.LevelLoader;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -75,8 +76,9 @@ public class LevelMenu extends Activity implements OnClickListener{
 		//String level = temp.getText().toString();		
 		Log.v("lvl click", "lvl " + temp.getTag());
 
-		LevelLoader levelLoader = new LevelLoader(this);
-		levelLoader.loadLevel((Integer) temp.getTag());
+		Intent i = new Intent(this, GameActivity.class);
+		i.putExtra("level",  (Integer) temp.getTag());
+		this.startActivity(i);
 		
 	}
 
