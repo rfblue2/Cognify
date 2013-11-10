@@ -31,7 +31,7 @@ public class LevelLoader {
 		this.game = game;
 		assetManager = context.getAssets(); 
 		 // To get names of all files inside the "Files" folder
-		  try {
+		  /*try {
 		   String[] files = assetManager.list("levels");
 		   
 		   Log.v("num files", ""+files.length);
@@ -43,7 +43,8 @@ public class LevelLoader {
 		   e1.printStackTrace();
 		  } finally {
 			  game.isInitialized = true;
-		  }
+		  }*/
+		  game.isInitialized = true;
 		  
 	}
 	
