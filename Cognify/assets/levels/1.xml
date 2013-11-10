@@ -4,14 +4,14 @@
 <level>
 	<shape>
 		<type>square</type>
-		<x>450</x>
+		<x>500</x>
 		<y>600</y>
 		<hole>true</hole>
 	</shape>
 	<shape>
 		<type>square</type>
-		<x>327</x>
-		<y>400</y>
+		<x>500</x>
+		<y>800</y>
 	</shape>
 </level>
 

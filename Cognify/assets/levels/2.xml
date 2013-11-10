@@ -3,29 +3,28 @@
 <level>
 	<shape>
 		<type>trapezoid</type>
-		<x>250</x>
-		<y>400</y>
+		<x>400</x>
+		<y>600</y>
 		<hole>true</hole>
 	</shape>
 
 	<shape>
 		<type>trapezoid</type>
-		 <x>450</x>
-		 <y>600</y>
+		 <x>600</x>
+		 <y>800</y>
 	</shape>
 	
-<<<<<<< HEAD
 	<shape>
 		<type>triangle_equal</type>
-		<x>450</x>
-		<y>400</y>
+		<x>600</x>
+		<y>600</y>
 		<hole>true</hole>
 	</shape>
 
 	<shape>
 		<type>triangle_equal</type>
-		 <x>250</x>
-		 <y>600</y>
+		 <x>400</x>
+		 <y>800</y>
 	</shape>
 
 =======
