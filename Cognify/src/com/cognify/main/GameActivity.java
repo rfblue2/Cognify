@@ -131,18 +131,16 @@ public class GameActivity extends Activity implements OnTouchListener {
 	}
 
 	public void nextLevel() {
-		try {
+		/*try {
 		    Thread.sleep(5000);
 		} catch (InterruptedException e) {
 		    e.printStackTrace();
-		}
-		shapes.clear();
+		}*/
 		refreshArrays();
 		levelLoader.loadLevel(++currentLevel);
 	}
 
 	public void previousLevel() {
-		shapes.clear();
 		refreshArrays();
 		levelLoader.loadLevel(--currentLevel);
 	}
@@ -239,13 +237,14 @@ public class GameActivity extends Activity implements OnTouchListener {
 							(int) shapes.get(n).getPosY()
 									+ shapes.get(n).getBmp().getHeight());
 				}
+				holder.unlockCanvasAndPost(c);
 				if (checkCompletion()) {
+					valid = false;
+					Log.v("COMPLETION", "Completed level: "+currentLevel);
 					Intent j = new Intent(context, NextLevel.class);
-					j.putExtra("lvl", currentLevel);
 					startActivityForResult(j, 0);
 					//nextLevel();
 				}
-				holder.unlockCanvasAndPost(c);
 			}
 		}
 
@@ -364,7 +363,6 @@ public class GameActivity extends Activity implements OnTouchListener {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 		if(resultCode == RESULT_OK)	{
-			Log.v("mgs", "RESULTOK");
 			nextLevel();
 		}
 	}
