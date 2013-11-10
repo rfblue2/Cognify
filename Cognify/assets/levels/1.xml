@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<level>	
+	<shape>
+		<type>Rect</type>
+		<x>300</x>
+		<y>150</y>
+		<hole>true</hole>
+	</shape>
+	
+	<shape>
+		<type>Rect</type>
+		 <x>400</x>
+		 <y>600</y>
+	</shape>
+
+</level>

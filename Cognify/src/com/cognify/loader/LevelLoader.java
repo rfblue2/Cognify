@@ -43,34 +43,19 @@ public class LevelLoader {
 		   e1.printStackTrace();
 		  }
 		  
-		/*  
-		try {
-			this.parse(assetManager.open("levels/test.xml"));
-		} catch (XmlPullParserException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
 	}
 	
 	public void loadLevel(int num){
 		try {
 			this.parse(assetManager.open("levels/"+num+".xml"));
 		} catch (XmlPullParserException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		//Intent i = new Intent(context, GameActivity.class);
-		//context.startActivity(i);
 	}
 	
-	public List parse(InputStream in) throws XmlPullParserException, IOException{
+	public List<Shape> parse(InputStream in) throws XmlPullParserException, IOException{
 		Log.v("parser", "started");
 		try{
 			
@@ -91,14 +76,12 @@ public class LevelLoader {
 		
 		while(parser.next() != XmlPullParser.END_TAG)
 		{
-			//Log.v("feed", "continuing");
 			if(parser.getEventType() != XmlPullParser.START_TAG)
 				continue;
 			String name = parser.getName();
 			
 			if(name.equals("shape"))
 			{
-				//Log.v("feed", "name is shape");
 				shapes.add(readEntry(parser));
 			}
 			else
@@ -114,6 +97,7 @@ public class LevelLoader {
 		String type = null;
 		int x = 0;
 		int y = 0;
+		boolean hole = false;
 		
 		while(parser.next() != XmlPullParser.END_TAG)
 		{
@@ -127,15 +111,23 @@ public class LevelLoader {
 				x = readX(parser);
 			else if(name.equals("y"))
 				y = readY(parser);
+			else if(name.equals("hole"))
+				hole = readHole(parser); 
 			else
 				skip(parser);
 			
 		}
-		Shape tempShape = new Shape(SHAPE.SQUARE, x, y, Shape.COLOR.BLUE, false, context);
-		Log.v("msg", "SHAPE X: "+tempShape.getPosX()); 
+		Shape tempShape = new Shape(SHAPE.SQUARE, x, y, Shape.COLOR.BLUE, hole, context); 
 		game.drawShapes(tempShape);
 		return tempShape;
 		
+	}
+	
+	private boolean readHole(XmlPullParser parser) throws XmlPullParserException, IOException{
+		parser.require(XmlPullParser.START_TAG, null, "hole");
+		String type = readText(parser);
+		parser.require(XmlPullParser.END_TAG, null, "hole");
+		return true;
 	}
 	
 	private String readType(XmlPullParser parser) throws XmlPullParserException, IOException{
