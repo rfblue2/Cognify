@@ -50,21 +50,4 @@
 		 <x>375</x>
 		 <y>900</y>
 	</shape>
-	
-		<shape>
-		<type>hexagon</type>
-		 <x>175</x>
-		 <y>900</y>
-	</shape>
-	<shape>
-		<type>arrow</type>
-		<x>775</x>
-		<y>600</y>
-		<hole>true</hole>
-	</shape>
-	<shape>
-		<type>arrow</type>
-		 <x>375</x>
-		 <y>900</y>
-	</shape>
 </level>
