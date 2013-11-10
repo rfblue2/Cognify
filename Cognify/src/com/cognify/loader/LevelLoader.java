@@ -64,6 +64,8 @@ public class LevelLoader {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			game.isInitialized = true;
 		}
 		
 		//Intent i = new Intent(context, GameActivity.class);
