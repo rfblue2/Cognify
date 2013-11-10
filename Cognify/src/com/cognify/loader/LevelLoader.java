@@ -126,7 +126,7 @@ public class LevelLoader {
 			
 		}
 		
-		return new Shape(SHAPE.RECTANGLE, x, y, null, false);
+		return new Shape(SHAPE.SQUARE, x, y, Shape.COLOR.BLUE, false, context);
 		
 		
 	}
