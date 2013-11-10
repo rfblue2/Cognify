@@ -85,14 +85,23 @@ public class Shape {
 		
 		if(hole)//Turns shape gray if it's a hole
 		{
+			int currentC = Color.rgb(63, 72, 204);//present blue color
+			Log.v("hole true", "making gray");
 			 int[] allpixels = new int [bmp.getHeight()*bmp.getWidth()];
 	
 			 bmp.getPixels(allpixels, 0, bmp.getWidth(), 0, 0, bmp.getWidth(), bmp.getHeight());
+			 
+			 int red = Color.red(bmp.getPixel(20, 20));
+			 int green = Color.green(bmp.getPixel(20, 20));
+			 int blue = Color.blue(bmp.getPixel(20, 20));
+			 
+			 Log.v("red", ""+red);
+			 Log.v("green", ""+green);
+			 Log.v("blue", ""+blue);
 	
 			 for(int i =0; i<bmp.getHeight()*bmp.getWidth();i++){
-				
 				 
-				 if(allpixels[i] == Color.BLUE)
+				 if(allpixels[i] == currentC)
 					 allpixels[i] = Color.GRAY;
 					 	
 			  }

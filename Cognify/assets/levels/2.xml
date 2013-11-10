@@ -2,29 +2,16 @@
 
 <level>
 	<shape>
-		<type>square</type>
+		<type>trapezoid</type>
 		<x>250</x>
 		<y>400</y>
 		<hole>true</hole>
 	</shape>
 
 	<shape>
-		<type>square</type>
+		<type>trapezoid</type>
 		 <x>450</x>
 		 <y>600</y>
 	</shape>
 	
-	<shape>
-		<type>triangle</type>
-		<x>450</x>
-		<y>400</y>
-		<hole>true</hole>
-	</shape>
-
-	<shape>
-		<type>triangle</type>
-		 <x>250</x>
-		 <y>600</y>
-	</shape>
-
 </level>

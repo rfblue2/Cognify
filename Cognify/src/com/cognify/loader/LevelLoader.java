@@ -123,7 +123,7 @@ public class LevelLoader {
 		
 	}
 	
-	private SHAPE toShape(String s){
+	private SHAPE toShape(String s){ 
 		Log.v("shape getting", s);
 		if(s.equals("square"))
 			return SHAPE.SQUARE;
