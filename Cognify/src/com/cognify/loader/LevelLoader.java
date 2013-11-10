@@ -117,9 +117,45 @@ public class LevelLoader {
 				skip(parser);
 			
 		}
-		Shape tempShape = new Shape(SHAPE.SQUARE, x, y, Shape.COLOR.BLUE, hole, context); 
+		Shape tempShape = new Shape(toShape(type), x, y, Shape.COLOR.BLUE, hole, context); 
 		game.drawShapes(tempShape);
 		return tempShape;
+		
+	}
+	
+	private SHAPE toShape(String s){ 
+		Log.v("shape getting", s);
+		if(s.equals("square"))
+			return SHAPE.SQUARE;
+		else if(s.equals("rectangle"))
+			return SHAPE.RECTANGLE;
+		else if(s.equals("arrow"))
+			return SHAPE.ARROW;
+		else if(s.equals("circle"))
+			return SHAPE.CIRCLE;
+		else if(s.equals("hexagon"))
+			return SHAPE.HEXAGON;
+		else if(s.equals("octagon"))
+			return SHAPE.OCTAGON;
+		else if(s.equals("oval"))
+			return SHAPE.OVAL;
+		else if(s.equals("pentagon"))
+			return SHAPE.PENTAGON;
+		else if(s.equals("rhombus"))
+			return SHAPE.RHOMBUS;
+		else if(s.equals("star"))
+			return SHAPE.STAR;
+		else if(s.equals("trapezoid"))
+			return SHAPE.TRAPEZOID;
+		else if(s.equals("triangle_equal"))
+			return SHAPE.TRIANGLE_EQU;
+		else if(s.equals("triangle_right"))
+			return SHAPE.TRIANGLE_RIGHT;
+		else
+		{
+			Log.e("getting shape", "improper shape in xml!" + s);
+			return null;
+		}
 		
 	}
 	
