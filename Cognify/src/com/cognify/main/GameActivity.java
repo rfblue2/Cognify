@@ -26,6 +26,7 @@ public class GameActivity extends Activity implements OnTouchListener {
 
 	MySurfaceView sv;
 	ArrayList<Shape> shapes;
+	private ArrayList<Shape> onlyHoles;
 	int currentLevel;
 	LevelLoader levelLoader;
 	
@@ -47,8 +48,12 @@ public class GameActivity extends Activity implements OnTouchListener {
 
 	private ArrayList<Float> scale;
 	private ArrayList<Float> angle;
+	
+	private ArrayList<Boolean> holeClear;
 
 	public boolean isInitialized = false;
+	private boolean doNotModify;
+	private boolean checkDownPress;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +63,7 @@ public class GameActivity extends Activity implements OnTouchListener {
 		setContentView(sv);
 		
 		shapes = new ArrayList<Shape>();
+		onlyHoles = new ArrayList<Shape>();
 		position = new ArrayList<Vector2D>();
 		vca = new ArrayList<Vector2D>();
 		vcb = new ArrayList<Vector2D>();
@@ -69,6 +75,7 @@ public class GameActivity extends Activity implements OnTouchListener {
 		bitmapBounds = new ArrayList<Rect>();
 		scale = new ArrayList<Float>();
 		angle = new ArrayList<Float>();
+		holeClear = new ArrayList<Boolean>();
 
 		levelLoader = new LevelLoader(this);
 		Bundle extras = getIntent().getExtras();
@@ -92,16 +99,45 @@ public class GameActivity extends Activity implements OnTouchListener {
 		vcb.add(null);
 		vpa.add(null);
 		vpb.add(null);
+		if(s.isHole()) {
+			onlyHoles.add(s);
+			holeClear.add(false);
+		}
+	}
+	
+	private void refreshArrays() {
+		shapes.clear();
+		position.clear();
+		vca.clear();
+		vcb.clear();
+		vpa.clear();
+		vpb.clear();
+		transform.clear();
+		bitmapWidth.clear();
+		bitmapHeight.clear();
+		bitmapBounds.clear();
+		scale.clear();
+		angle.clear();
 	}
 	
 	public void nextLevel()	{
 		shapes.clear();
+		refreshArrays();
 		levelLoader.loadLevel(++currentLevel);
 	}
 
 	public void previousLevel()	{
 		shapes.clear();
+		refreshArrays();
 		levelLoader.loadLevel(--currentLevel);
+	}
+	
+	private boolean checkCompletion() {
+		for (int x = 0; x < holeClear.size(); x++) {
+			if(!holeClear.get(x))
+				return false;
+		}
+		return true;
 	}
 	
 	public class MySurfaceView extends SurfaceView implements Runnable	{
@@ -147,7 +183,6 @@ public class GameActivity extends Activity implements OnTouchListener {
 							position.get(n).getY());
 
 					c.drawBitmap(shapes.get(n).getBmp(), transform.get(n), paint);
-					System.out.println(transform.get(n).toString());
 					
 					float[] temp = new float[9];
 					transform.get(n).getValues(temp);
@@ -159,9 +194,33 @@ public class GameActivity extends Activity implements OnTouchListener {
 							(int) shapes.get(n).getPosY() + shapes.get(n).getBmp().getHeight());
 					// c.drawBitmap(shapes.get(n).getBmp(),
 					// shapes.get(n).getPosX(), shapes.get(n).getPosY(), null);
+					for (int x = 0; x < holeClear.size(); x++) { // onlyHoles array
+						for ( int y = 0; y < shapes.size(); y++ ) { // shapes array
+							if ( shapes.get(y).isHole() || (shapes.get(y).getS() != onlyHoles.get(x).getS()) )
+									continue;
+							else {
+								/*System.out.println("hole: " + onlyHoles.get(x).getPosX() + ", " + onlyHoles.get(x).getPosY());
+								System.out.println("shape: " + shapes.get(y).getPosX() + ", " + shapes.get(y).getPosY());*/
+								
+								//if ( shapes.get(y).getPosX() == onlyHoles.get(x).getPosX() && shapes.get(y).getPosY() == onlyHoles.get(x).getPosY() )
+								if ( shapes.get(y).getPosX() - onlyHoles.get(x).getPosX() <= 5 && 
+										shapes.get(y).getPosX() - onlyHoles.get(x).getPosX() >= -5 && 
+										shapes.get(y).getPosY() - onlyHoles.get(x).getPosY() <= 5 &&
+										shapes.get(y).getPosY() - onlyHoles.get(x).getPosY() >= -5)
+									holeClear.set(x, true);
+							}
+						}
+					}
+					
+					if(checkCompletion()) {
+						nextLevel();
+					}
 				}
 				
 				holder.unlockCanvasAndPost(c);
+				if(bitmapBounds.get(0).equals(bitmapBounds.get(1))) {
+					System.out.println("#winning");
+				}
 			}
 		}
 		
@@ -200,6 +259,23 @@ public class GameActivity extends Activity implements OnTouchListener {
 
 	@Override
 	public boolean onTouch(View v, MotionEvent me) {
+		int actionCode = me.getAction() & MotionEvent.ACTION_MASK;
+		if (actionCode == MotionEvent.ACTION_POINTER_UP ||
+				actionCode == MotionEvent.ACTION_UP) {
+			checkDownPress = false;
+			doNotModify = true;
+		} else if (actionCode == MotionEvent.ACTION_MOVE) {
+			checkDownPress = true;
+			doNotModify = true;
+		} else {
+			if (bitmapBounds.get(activeShapeIndex).contains(
+					(int) touchManager.getPoint(0).getX(),
+					(int) touchManager.getPoint(0).getY())) {
+				checkDownPress = true;
+			}
+			doNotModify = false;
+		}
+		
 		for (int x = 0; x < shapes.size(); x++ ) {
 			vca.set(x, null);
 			vcb.set(x, null);
@@ -212,28 +288,34 @@ public class GameActivity extends Activity implements OnTouchListener {
 			for (int x = 0; x < shapes.size(); x++) {
 				if (bitmapBounds.get(x).contains(
 						(int) touchManager.getPoint(0).getX(),
-						(int) touchManager.getPoint(0).getY())) {
+						(int) touchManager.getPoint(0).getY()) && !doNotModify) {
 					activeShapeIndex = x;
 					break;
 				}
 			}
 
-			if (touchManager.getPressCount() == 1 && !shapes.get(activeShapeIndex).isHole()) {
-				vca.set(activeShapeIndex, touchManager.getPoint(0));
-				vpa.set(activeShapeIndex, touchManager.getPreviousPoint(0));
-				position.get(activeShapeIndex).add(touchManager.moveDelta(0));
-			} else {
-				if (touchManager.getPressCount() == 2 && shapes.get(activeShapeIndex).isHole()) {
+			if(checkDownPress) {
+				if (touchManager.getPressCount() == 1 && !shapes.get(activeShapeIndex).isHole()) {
 					vca.set(activeShapeIndex, touchManager.getPoint(0));
 					vpa.set(activeShapeIndex, touchManager.getPreviousPoint(0));
-					vcb.set(activeShapeIndex, touchManager.getPoint(1));
-					vpb.set(activeShapeIndex, touchManager.getPreviousPoint(1));
+					if (bitmapBounds.get(activeShapeIndex).contains(
+							(int) touchManager.getPoint(0).getX(),
+							(int) touchManager.getPoint(0).getY())) {
+						position.get(activeShapeIndex).add(touchManager.moveDelta(0));
+					}
+				} else {
+					if (touchManager.getPressCount() == 2 && shapes.get(activeShapeIndex).isHole()) {
+						vca.set(activeShapeIndex, touchManager.getPoint(0));
+						vpa.set(activeShapeIndex, touchManager.getPreviousPoint(0));
+						vcb.set(activeShapeIndex, touchManager.getPoint(1));
+						vpb.set(activeShapeIndex, touchManager.getPreviousPoint(1));
 
-					Vector2D current = touchManager.getVector(0, 1);
-					Vector2D previous = touchManager.getPreviousVector(0, 1);
+						Vector2D current = touchManager.getVector(0, 1);
+						Vector2D previous = touchManager.getPreviousVector(0, 1);
 
-					angle.set(activeShapeIndex, angle.get(activeShapeIndex)
-							- Vector2D.getSignedAngleBetween(current, previous));
+						angle.set(activeShapeIndex, angle.get(activeShapeIndex)
+								- Vector2D.getSignedAngleBetween(current, previous));
+					}
 				}
 			}
 			sv.invalidate();

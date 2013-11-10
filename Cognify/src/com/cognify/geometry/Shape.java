@@ -16,6 +16,7 @@ public class Shape {
 	float posX, posY;
 	int dir;
 	COLOR c;
+	SHAPE s;
 	Bitmap bmp;
 	boolean hole;//true if it is a hole
 	Context context;
@@ -37,8 +38,10 @@ public class Shape {
 		 BitmapFactory.Options opt = new BitmapFactory.Options();
 		 opt.inMutable = true;
 		 
+		 s = shape;
 		 
-		switch(shape)	{
+		 
+		switch(s)	{
 		case RECTANGLE:
 			bmp = BitmapFactory.decodeResource(this.context.getResources(), R.drawable.rectangle, opt);
 			Log.v("bitmap mutable first", ""+bmp.isMutable());
@@ -129,6 +132,10 @@ public class Shape {
 
 	public void setC(COLOR c) {
 		this.c = c;
+	}
+	
+	public SHAPE getS() {
+		return s;
 	}
 
 	public boolean isHole() {
