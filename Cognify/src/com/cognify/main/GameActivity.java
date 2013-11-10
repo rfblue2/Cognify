@@ -16,6 +16,7 @@ import android.graphics.LightingColorFilter;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -31,7 +32,15 @@ public class GameActivity extends Activity implements OnTouchListener {
 	private ArrayList<Shape> onlyHoles;
 	int currentLevel;
 	LevelLoader levelLoader;
+	private long startTime;
+	private long elapsed;
+	private int score;
+	
+	MediaPlayer placed;
+	MediaPlayer finished;
 
+	public boolean finishedLevels[];//there are 40 levels
+	
 	int activeShapeIndex = 0;
 	private TouchManager touchManager = new TouchManager(2);
 
@@ -63,7 +72,15 @@ public class GameActivity extends Activity implements OnTouchListener {
 		sv = new MySurfaceView(this);
 		sv.setOnTouchListener(this);
 		setContentView(sv);
-
+		
+		placed = MediaPlayer.create(GameActivity.this, R.raw.place_shape);
+		finished = MediaPlayer.create(GameActivity.this, R.raw.finish_level);
+		startTime = System.currentTimeMillis();
+		
+		finishedLevels = new boolean[40];
+		for(int i = 0; i < 40; i++)	{//Hardcoded # of levels
+			finishedLevels[i] = false;
+		}
 		shapes = new ArrayList<Shape>();
 		onlyHoles = new ArrayList<Shape>();
 		position = new ArrayList<Vector2D>();
@@ -128,21 +145,20 @@ public class GameActivity extends Activity implements OnTouchListener {
 		bitmapBounds.clear();
 		scale.clear();
 		angle.clear();
+		startTime = System.currentTimeMillis();
 	}
 
 	public void nextLevel() {
-		try {
+		/*try {
 		    Thread.sleep(5000);
 		} catch (InterruptedException e) {
 		    e.printStackTrace();
-		}
-		shapes.clear();
+		}*/
 		refreshArrays();
 		levelLoader.loadLevel(++currentLevel);
 	}
 
 	public void previousLevel() {
-		shapes.clear();
 		refreshArrays();
 		levelLoader.loadLevel(--currentLevel);
 	}
@@ -152,6 +168,7 @@ public class GameActivity extends Activity implements OnTouchListener {
 			if (!holeClear.get(x))
 				return false;
 		}
+		score = (int) elapsed;
 		return true;
 	}
 
@@ -189,6 +206,12 @@ public class GameActivity extends Activity implements OnTouchListener {
 
 				Canvas c = holder.lockCanvas();
 				c.drawARGB(255, 255, 255, 204);
+				
+				Paint time = new Paint();
+				time.setTextSize(70);
+				elapsed = 30-((System.currentTimeMillis() - startTime)/1000);
+				
+				c.drawText("Countdown: " + elapsed, 10, 60, time);
 				for (int n = 0; n < shapes.size(); n++) {
 
 					Paint paint = new Paint();
@@ -214,6 +237,7 @@ public class GameActivity extends Activity implements OnTouchListener {
 									shapes.get(y).getPosX() - onlyHoles.get(x).getPosX() >= -25 && 
 									shapes.get(y).getPosY() - onlyHoles.get(x).getPosY() <= 25 &&
 									shapes.get(y).getPosY() - onlyHoles.get(x).getPosY() >= -25) {
+									//placed.start();
 									holeClear.set(x, true);
 									transform.get(y).reset();
 									transform.get(y).postTranslate(onlyHoles.get(x).getPosX(), onlyHoles.get(x).getPosY());
@@ -239,13 +263,22 @@ public class GameActivity extends Activity implements OnTouchListener {
 							(int) shapes.get(n).getPosY()
 									+ shapes.get(n).getBmp().getHeight());
 				}
+				holder.unlockCanvasAndPost(c);
 				if (checkCompletion()) {
+					valid = false;
+					Log.v("COMPLETION", "Completed level: "+currentLevel + " Score: "+score);
+					finished.start();
+					finishedLevels[currentLevel - 1] = true;
+					Intent p = new Intent();
+					Bundle info = new Bundle();
+					info.putBooleanArray("finished", finishedLevels);
+					p.putExtras(info);
+					setResult(RESULT_OK, p);
 					Intent j = new Intent(context, NextLevel.class);
-					j.putExtra("lvl", currentLevel);
+					j.putExtra("displayscore", score);
 					startActivityForResult(j, 0);
 					//nextLevel();
 				}
-				holder.unlockCanvasAndPost(c);
 			}
 		}
 
@@ -364,7 +397,6 @@ public class GameActivity extends Activity implements OnTouchListener {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 		if(resultCode == RESULT_OK)	{
-			Log.v("mgs", "RESULTOK");
 			nextLevel();
 		}
 	}

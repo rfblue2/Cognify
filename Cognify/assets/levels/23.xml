@@ -6,12 +6,6 @@
 		<y>600</y>
 		<hole>true</hole>
 	</shape>
-
-	<shape>
-		<type>circle</type>
-		 <x>875</x>
-		 <y>1000</y>
-	</shape>
 	
 	<shape>
 		<type>arrow</type>
@@ -19,35 +13,17 @@
 		<y>595</y>
 		<hole>true</hole>
 	</shape>
-
-	<shape>
-		<type>arrow</type>
-		 <x>675</x>
-		 <y>1000</y>
-	</shape>
 	<shape>
 		<type>rectangle</type>
 		<x>675</x>
 		<y>525</y>
 		<hole>true</hole>
 	</shape>
-
-	<shape>
-		<type>rectangle</type>
-		 <x>475</x>
-		 <y>1000</y>
-	</shape>
 	<shape>
 		<type>square</type>
 		<x>615</x>
 		<y>525</y>
 		<hole>true</hole>
-	</shape>
-
-	<shape>
-		<type>square</type>
-		 <x>275</x>
-		 <y>1000</y>
 	</shape>
 	
 	<shape>
@@ -55,6 +31,30 @@
 		<x>615</x>
 		<y>435</y>
 		<hole>true</hole>
+	</shape>
+
+	<shape>
+		<type>circle</type>
+		 <x>875</x>
+		 <y>1000</y>
+	</shape>
+
+	<shape>
+		<type>arrow</type>
+		 <x>675</x>
+		 <y>1000</y>
+	</shape>
+
+	<shape>
+		<type>rectangle</type>
+		 <x>475</x>
+		 <y>1000</y>
+	</shape>
+
+	<shape>
+		<type>square</type>
+		 <x>275</x>
+		 <y>1000</y>
 	</shape>
 
 	<shape>
