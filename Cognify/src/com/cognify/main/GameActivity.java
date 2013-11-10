@@ -31,7 +31,7 @@ public class GameActivity extends Activity implements OnTouchListener {
 	private ArrayList<Shape> onlyHoles;
 	int currentLevel;
 	LevelLoader levelLoader;
-	
+
 	int activeShapeIndex = 0;
 	private TouchManager touchManager = new TouchManager(2);
 
@@ -50,20 +50,20 @@ public class GameActivity extends Activity implements OnTouchListener {
 
 	private ArrayList<Float> scale;
 	private ArrayList<Float> angle;
-	
+
 	private ArrayList<Boolean> holeClear;
 
 	public boolean isInitialized = false;
 	private boolean doNotModify;
 	private boolean checkDownPress;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		sv = new MySurfaceView(this);
 		sv.setOnTouchListener(this);
 		setContentView(sv);
-		
+
 		shapes = new ArrayList<Shape>();
 		onlyHoles = new ArrayList<Shape>();
 		position = new ArrayList<Vector2D>();
@@ -92,8 +92,8 @@ public class GameActivity extends Activity implements OnTouchListener {
 			break;
 		}
 	}
-	
-	public void drawShapes(Shape s)	{
+
+	public void drawShapes(Shape s) {
 		shapes.add(s);
 		position.add(new Vector2D(s.getPosX() + s.getBmp().getWidth() / 2, s
 				.getPosY() + s.getBmp().getHeight() / 2));
@@ -109,12 +109,12 @@ public class GameActivity extends Activity implements OnTouchListener {
 		vcb.add(null);
 		vpa.add(null);
 		vpb.add(null);
-		if(s.isHole()) {
+		if (s.isHole()) {
 			onlyHoles.add(s);
 			holeClear.add(false);
 		}
 	}
-	
+
 	private void refreshArrays() {
 		shapes.clear();
 		position.clear();
@@ -129,58 +129,66 @@ public class GameActivity extends Activity implements OnTouchListener {
 		scale.clear();
 		angle.clear();
 	}
-	
-	public void nextLevel()	{
+
+	public void nextLevel() {
+		try {
+		    Thread.sleep(5000);
+		} catch (InterruptedException e) {
+		    e.printStackTrace();
+		}
 		shapes.clear();
 		refreshArrays();
 		levelLoader.loadLevel(++currentLevel);
 	}
 
-	public void previousLevel()	{
+	public void previousLevel() {
 		shapes.clear();
 		refreshArrays();
 		levelLoader.loadLevel(--currentLevel);
 	}
-	
+
 	private boolean checkCompletion() {
 		for (int x = 0; x < holeClear.size(); x++) {
-			if(!holeClear.get(x))
+			if (!holeClear.get(x))
 				return false;
 		}
 		return true;
 	}
-	
-	public class MySurfaceView extends SurfaceView implements Runnable	{
+
+	public class MySurfaceView extends SurfaceView implements Runnable {
 
 		Thread t = null;
 		SurfaceHolder holder;
 		boolean valid = false;
-		
+
 		public MySurfaceView(Context context) {
 			super(context);
 			holder = getHolder();
-			
+
 		}
-		
+
 		private float getDegreesFromRadians(float angle) {
 			return (float) (angle * 180.0 / Math.PI);
 		}
 
 		@Override
 		public void run() {
-			while(valid)	{
-				/*Paint holeColor = new Paint(Color.LTGRAY);
-				LightingColorFilter holeFilter = new LightingColorFilter(Color.RED, 1);
-				holeColor.setColorFilter(holeFilter);*/
-				//draw
-				if(!holder.getSurface().isValid() || !isInitialized)	{
-					continue; 
+			while (valid) {
+				/*
+				 * Paint holeColor = new Paint(Color.LTGRAY);
+				 * LightingColorFilter holeFilter = new
+				 * LightingColorFilter(Color.RED, 1);
+				 * holeColor.setColorFilter(holeFilter);
+				 */
+				// draw
+				if (!holder.getSurface().isValid() || !isInitialized) {
+					continue;
 				}
-				
+
 				Canvas c = holder.lockCanvas();
 				c.drawARGB(255, 255, 255, 204);
-				for(int n = 0; n < shapes.size(); n++)	{
-					 
+				for (int n = 0; n < shapes.size(); n++) {
+
 					Paint paint = new Paint();
 
 					transform.get(n).reset();
@@ -191,63 +199,70 @@ public class GameActivity extends Activity implements OnTouchListener {
 					transform.get(n).postScale(scale.get(n), scale.get(n));
 					transform.get(n).postTranslate(position.get(n).getX(),
 							position.get(n).getY());
-
-					c.drawBitmap(shapes.get(n).getBmp(), transform.get(n), paint);
 					
-					float[] temp = new float[9];
-					transform.get(n).getValues(temp);
-					
-					shapes.get(n).setPosX(temp[2]);
-					shapes.get(n).setPosY(temp[5]);
-					bitmapBounds.get(n).set((int) shapes.get(n).getPosX(), (int) shapes.get(n).getPosY(),
-							(int) shapes.get(n).getPosX() + shapes.get(n).getBmp().getWidth(),
-							(int) shapes.get(n).getPosY() + shapes.get(n).getBmp().getHeight());
 					// c.drawBitmap(shapes.get(n).getBmp(),
 					// shapes.get(n).getPosX(), shapes.get(n).getPosY(), null);
-					for (int x = 0; x < holeClear.size(); x++) { // onlyHoles array
-						for ( int y = 0; y < shapes.size(); y++ ) { // shapes array
-							if ( shapes.get(y).isHole() || (shapes.get(y).getShape() != onlyHoles.get(x).getShape()) )
-									continue;
-							else {
-								/*System.out.println("hole: " + onlyHoles.get(x).getPosX() + ", " + onlyHoles.get(x).getPosY());
-								System.out.println("shape: " + shapes.get(y).getPosX() + ", " + shapes.get(y).getPosY());*/
-								
-								//if ( shapes.get(y).getPosX() == onlyHoles.get(x).getPosX() && shapes.get(y).getPosY() == onlyHoles.get(x).getPosY() )
-								if ( shapes.get(y).getPosX() - onlyHoles.get(x).getPosX() <= 5 && 
-										shapes.get(y).getPosX() - onlyHoles.get(x).getPosX() >= -5 && 
-										shapes.get(y).getPosY() - onlyHoles.get(x).getPosY() <= 5 &&
-										shapes.get(y).getPosY() - onlyHoles.get(x).getPosY() >= -5)
+				}
+				for (int x = 0; x < holeClear.size(); x++) { // onlyHoles array
+					for ( int y = 0; y < shapes.size(); y++ ) { // shapes array
+						if ( shapes.get(y).isHole() || (shapes.get(y).getShape() != onlyHoles.get(x).getShape()) )
+								continue;
+						else {							
+							if ( shapes.get(y).getPosX() - onlyHoles.get(x).getPosX() <= 5 && 
+									shapes.get(y).getPosX() - onlyHoles.get(x).getPosX() >= -5 && 
+									shapes.get(y).getPosY() - onlyHoles.get(x).getPosY() <= 5 &&
+									shapes.get(y).getPosY() - onlyHoles.get(x).getPosY() >= -5) {
 									holeClear.set(x, true);
+									transform.get(y).reset();
+									transform.get(y).postTranslate(onlyHoles.get(x).getPosX(), onlyHoles.get(x).getPosY());
 							}
 						}
 					}
+				}
+				for (int n = 0; n < shapes.size(); n++) {
+					Paint paint = new Paint();
+					c.drawBitmap(shapes.get(n).getBmp(), transform.get(n),
+							paint);
 					
-					if(checkCompletion()) {
-						nextLevel();
-					}				}
+					float[] temp = new float[9];
+					transform.get(n).getValues(temp);
+
+					shapes.get(n).setPosX(temp[2]);
+					shapes.get(n).setPosY(temp[5]);
+					bitmapBounds.get(n).set(
+							(int) shapes.get(n).getPosX(),
+							(int) shapes.get(n).getPosY(),
+							(int) shapes.get(n).getPosX()
+									+ shapes.get(n).getBmp().getWidth(),
+							(int) shapes.get(n).getPosY()
+									+ shapes.get(n).getBmp().getHeight());
+				}
+				if (checkCompletion()) {
+					nextLevel();
+				}
 				holder.unlockCanvasAndPost(c);
 			}
 		}
-		
-		public void pause()	{
+
+		public void pause() {
 			valid = false;
-			while(true)	{
-				try	{
+			while (true) {
+				try {
 					t.join();
-				}catch(InterruptedException e)	{
+				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
 				break;
 			}
 			t = null;
 		}
-		
-		public void resume()	{
+
+		public void resume() {
 			valid = true;
 			t = new Thread(this);
 			t.start();
 		}
-		
+
 	}
 
 	@Override
@@ -265,8 +280,8 @@ public class GameActivity extends Activity implements OnTouchListener {
 	@Override
 	public boolean onTouch(View v, MotionEvent me) {
 		int actionCode = me.getAction() & MotionEvent.ACTION_MASK;
-		if (actionCode == MotionEvent.ACTION_POINTER_UP ||
-				actionCode == MotionEvent.ACTION_UP) {
+		if (actionCode == MotionEvent.ACTION_POINTER_UP
+				|| actionCode == MotionEvent.ACTION_UP) {
 			checkDownPress = false;
 			doNotModify = true;
 		} else if (actionCode == MotionEvent.ACTION_MOVE) {
@@ -280,8 +295,8 @@ public class GameActivity extends Activity implements OnTouchListener {
 			}
 			doNotModify = false;
 		}
-		
-		for (int x = 0; x < shapes.size(); x++ ) {
+
+		for (int x = 0; x < shapes.size(); x++) {
 			vca.set(x, null);
 			vcb.set(x, null);
 			vpa.set(x, null);
@@ -293,33 +308,43 @@ public class GameActivity extends Activity implements OnTouchListener {
 			for (int x = 0; x < shapes.size(); x++) {
 				if (bitmapBounds.get(x).contains(
 						(int) touchManager.getPoint(0).getX(),
-						(int) touchManager.getPoint(0).getY()) && !doNotModify) {
+						(int) touchManager.getPoint(0).getY())
+						&& !doNotModify) {
 					activeShapeIndex = x;
 					break;
 				}
 			}
 
-			if(checkDownPress) {
-				if (touchManager.getPressCount() == 1 && !shapes.get(activeShapeIndex).isHole()) {
+			if (checkDownPress) {
+				if (touchManager.getPressCount() == 1
+						&& !shapes.get(activeShapeIndex).isHole()) {
 					vca.set(activeShapeIndex, touchManager.getPoint(0));
 					vpa.set(activeShapeIndex, touchManager.getPreviousPoint(0));
 					if (bitmapBounds.get(activeShapeIndex).contains(
 							(int) touchManager.getPoint(0).getX(),
 							(int) touchManager.getPoint(0).getY())) {
-						position.get(activeShapeIndex).add(touchManager.moveDelta(0));
+						position.get(activeShapeIndex).add(
+								touchManager.moveDelta(0));
 					}
 				} else {
-					if (touchManager.getPressCount() == 2 && shapes.get(activeShapeIndex).isHole()) {
+					if (touchManager.getPressCount() == 2
+							&& shapes.get(activeShapeIndex).isHole()) {
 						vca.set(activeShapeIndex, touchManager.getPoint(0));
-						vpa.set(activeShapeIndex, touchManager.getPreviousPoint(0));
+						vpa.set(activeShapeIndex,
+								touchManager.getPreviousPoint(0));
 						vcb.set(activeShapeIndex, touchManager.getPoint(1));
-						vpb.set(activeShapeIndex, touchManager.getPreviousPoint(1));
+						vpb.set(activeShapeIndex,
+								touchManager.getPreviousPoint(1));
 
 						Vector2D current = touchManager.getVector(0, 1);
-						Vector2D previous = touchManager.getPreviousVector(0, 1);
+						Vector2D previous = touchManager
+								.getPreviousVector(0, 1);
 
-						angle.set(activeShapeIndex, angle.get(activeShapeIndex)
-								- Vector2D.getSignedAngleBetween(current, previous));
+						angle.set(
+								activeShapeIndex,
+								angle.get(activeShapeIndex)
+										- Vector2D.getSignedAngleBetween(
+												current, previous));
 					}
 				}
 			}
