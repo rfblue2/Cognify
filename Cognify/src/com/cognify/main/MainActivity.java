@@ -8,16 +8,20 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.AssetManager;
+import android.graphics.drawable.AnimationDrawable;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 public class MainActivity extends Activity implements View.OnClickListener {
 
 	Button play;
 	Button prefs;
 	Button about;
+	
+	AnimationDrawable imgGears;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) { 
@@ -33,6 +37,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		prefs.setOnClickListener(this);
 		about.setOnClickListener(this);
 		
+		ImageView img = (ImageView) findViewById(R.id.ivBack);
+		img.setBackgroundResource(R.drawable.menu_gears);
+		imgGears = (AnimationDrawable) img.getBackground();
+		imgGears.start();
 	}
 
 	@Override

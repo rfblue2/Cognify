@@ -12,10 +12,11 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@android:style/Theme.Light.NoTitleBar" >
         
         <activity
-            android:name="com.cognify.main.Splash" >
+            android:name="com.cognify.main.Splash"
+     	    android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,7 +25,8 @@
         </activity>
         
         <activity
-            android:name="com.cognify.main.MainActivity" >
+            android:name="com.cognify.main.MainActivity"
+     	    android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="com.cognify.main.MAIN" />
 

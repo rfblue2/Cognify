@@ -27,17 +27,24 @@ public final class R {
         public static final int hexagon=0x7f020003;
         public static final int ic_launcher=0x7f020004;
         public static final int level_button_back=0x7f020005;
-        public static final int octagon=0x7f020006;
-        public static final int oval=0x7f020007;
-        public static final int pentagon=0x7f020008;
-        public static final int rectangle=0x7f020009;
-        public static final int rhombus=0x7f02000a;
-        public static final int splash_background=0x7f02000b;
-        public static final int square=0x7f02000c;
-        public static final int star=0x7f02000d;
-        public static final int trapezoid=0x7f02000e;
-        public static final int triangle_equal=0x7f02000f;
-        public static final int triangle_right=0x7f020010;
+        public static final int level_button_back_pressed=0x7f020006;
+        public static final int level_gear=0x7f020007;
+        public static final int menu_gears=0x7f020008;
+        public static final int menuimg1=0x7f020009;
+        public static final int menuimg2=0x7f02000a;
+        public static final int menuimg3=0x7f02000b;
+        public static final int menuimg4=0x7f02000c;
+        public static final int octagon=0x7f02000d;
+        public static final int oval=0x7f02000e;
+        public static final int pentagon=0x7f02000f;
+        public static final int rectangle=0x7f020010;
+        public static final int rhombus=0x7f020011;
+        public static final int splash_background=0x7f020012;
+        public static final int square=0x7f020013;
+        public static final int star=0x7f020014;
+        public static final int trapezoid=0x7f020015;
+        public static final int triangle_equal=0x7f020016;
+        public static final int triangle_right=0x7f020017;
     }
     public static final class id {
         public static final int action_settings=0x7f09000c;
@@ -45,6 +52,7 @@ public final class R {
         public static final int bPlay=0x7f090002;
         public static final int bPrefs=0x7f090003;
         public static final int exciteRadio=0x7f09000b;
+        public static final int ivBack=0x7f090001;
         public static final int main_level_layout=0x7f090005;
         public static final int musicGroup=0x7f090009;
         public static final int musicLayout=0x7f090006;
@@ -52,7 +60,6 @@ public final class R {
         public static final int musicType=0x7f090008;
         public static final int peaceRadio=0x7f09000a;
         public static final int textView1=0x7f090000;
-        public static final int tvTitle=0x7f090001;
     }
     public static final class layout {
         public static final int about=0x7f030000;

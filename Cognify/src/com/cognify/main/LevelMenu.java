@@ -56,7 +56,7 @@ public class LevelMenu extends Activity implements OnClickListener{
 				temp.setTag(lNum);
 				temp.setSingleLine(true);
 				temp.setPadding(30, 30, 30, 30);
-				temp.setBackgroundResource(R.drawable.level_button_back);
+				temp.setBackgroundResource(R.drawable.level_gear);
 				temp.setLayoutParams(params);
 				
 				
@@ -75,10 +75,10 @@ public class LevelMenu extends Activity implements OnClickListener{
 		Button temp = (Button) v;
 		//String level = temp.getText().toString();		
 		Log.v("lvl click", "lvl " + temp.getTag());
-
 		Intent i = new Intent(this, GameActivity.class);
 		i.putExtra("level",  (Integer) temp.getTag());
 		this.startActivity(i);
+
 		
 	}
 
