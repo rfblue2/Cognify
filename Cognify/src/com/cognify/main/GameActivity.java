@@ -9,6 +9,7 @@ import com.cognify.loader.LevelLoader;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.LightingColorFilter;
@@ -82,6 +83,14 @@ public class GameActivity extends Activity implements OnTouchListener {
 		Bundle extras = getIntent().getExtras();
 		currentLevel = extras.getInt("level");
 		levelLoader.loadLevel(currentLevel);
+		
+		switch(currentLevel)	{//for walkthrough
+		case 1:
+			Intent i = new Intent(this, Walkthrough.class);
+			i.putExtra("lvl", currentLevel);
+			startActivity(i);
+			break;
+		}
 	}
 	
 	public void drawShapes(Shape s)	{
