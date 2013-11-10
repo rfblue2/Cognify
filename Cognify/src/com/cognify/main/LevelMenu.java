@@ -1,5 +1,7 @@
 package com.cognify.main;
 
+import java.util.ArrayList;
+
 import com.cognify.loader.LevelLoader;
 
 import android.app.Activity;
@@ -16,10 +18,13 @@ import android.widget.RelativeLayout;
 
 public class LevelMenu extends Activity implements OnClickListener{
 	
+	ArrayList<Button>levelButtons;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) { 
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.level_menu);
+		levelButtons = new ArrayList<Button>();
 		addLevelButtons();
 	}
 
@@ -59,10 +64,8 @@ public class LevelMenu extends Activity implements OnClickListener{
 				temp.setBackgroundResource(R.drawable.level_gear);
 				temp.setLayoutParams(params);
 				
-				
-				
 				temp.setOnClickListener(this);
-				 
+				levelButtons.add(temp);
 				innerLayout.addView(temp);
 				lNum++;
 			}
@@ -77,9 +80,22 @@ public class LevelMenu extends Activity implements OnClickListener{
 		Log.v("lvl click", "lvl " + temp.getTag());
 		Intent i = new Intent(this, GameActivity.class);
 		i.putExtra("level",  (Integer) temp.getTag());
-		this.startActivity(i);
-
+		this.startActivityForResult(i, 0);
 		
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if(resultCode == RESULT_OK)	{
+			Bundle info = data.getExtras();
+			boolean arr[] = info.getBooleanArray("finished");
+			for(int i = 0; i < 40; i++)	{//HARDCODED # OF LEVELS
+				if(arr[i])	{
+					levelButtons.get(i).setBackgroundResource(R.drawable.level_gear_passed);
+				}
+			}
+		}
 	}
 
 }

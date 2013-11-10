@@ -32,6 +32,8 @@ public class GameActivity extends Activity implements OnTouchListener {
 	int currentLevel;
 	LevelLoader levelLoader;
 
+	public boolean finishedLevels[];//there are 40 levels
+	
 	int activeShapeIndex = 0;
 	private TouchManager touchManager = new TouchManager(2);
 
@@ -63,7 +65,11 @@ public class GameActivity extends Activity implements OnTouchListener {
 		sv = new MySurfaceView(this);
 		sv.setOnTouchListener(this);
 		setContentView(sv);
-
+		
+		finishedLevels = new boolean[40];
+		for(int i = 0; i < 40; i++)	{//Hardcoded # of levels
+			finishedLevels[i] = false;
+		}
 		shapes = new ArrayList<Shape>();
 		onlyHoles = new ArrayList<Shape>();
 		position = new ArrayList<Vector2D>();
@@ -241,6 +247,12 @@ public class GameActivity extends Activity implements OnTouchListener {
 				if (checkCompletion()) {
 					valid = false;
 					Log.v("COMPLETION", "Completed level: "+currentLevel);
+					finishedLevels[currentLevel - 1] = true;
+					Intent p = new Intent();
+					Bundle info = new Bundle();
+					info.putBooleanArray("finished", finishedLevels);
+					p.putExtras(info);
+					setResult(RESULT_OK, p);
 					Intent j = new Intent(context, NextLevel.class);
 					startActivityForResult(j, 0);
 					//nextLevel();
