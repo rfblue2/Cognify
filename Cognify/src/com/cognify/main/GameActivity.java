@@ -20,8 +20,6 @@ public class GameActivity extends Activity implements OnTouchListener {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		//setContentView(R.layout.game_activity);
-		//sv = (SurfaceView) findViewById(R.id.svGame);
 		sv = new MySurfaceView(this);
 		sv.setOnTouchListener(this);
 		test = new Shape(Shape.SHAPE.SQUARE, 10, 10, Shape.COLOR.BLUE, false, this);

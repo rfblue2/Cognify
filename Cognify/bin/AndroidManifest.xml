@@ -48,6 +48,10 @@
             </intent-filter>
         </activity>
         
+        <activity
+            android:name="com.cognify.main.GameActivity">
+        </activity>
+        
     </application>
 
 </manifest>

@@ -11,8 +11,10 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import com.cognify.geometry.Shape;
 import com.cognify.geometry.Shape.SHAPE;
+import com.cognify.main.GameActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.AssetManager;
 import android.util.Log;
 import android.util.Xml;
@@ -61,6 +63,9 @@ public class LevelLoader {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		Intent i = new Intent(context, GameActivity.class);
+		context.startActivity(i);
 	}
 	
 	public List parse(InputStream in) throws XmlPullParserException, IOException{
@@ -102,7 +107,6 @@ public class LevelLoader {
 	}
 	
 	//entries in theirs = shapes in ours
-	
 	
 	private Shape readEntry(XmlPullParser parser) throws XmlPullParserException, IOException{
 		String type = null;
