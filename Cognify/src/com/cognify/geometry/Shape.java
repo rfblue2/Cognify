@@ -1,64 +1,67 @@
 package com.cognify.geometry;
 
+import com.cognify.main.R;
+
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 
 public class Shape {
 	
-	int posX, posY;
+	float posX, posY;
 	int dir;
 	COLOR c;
-	String imgSrc;
 	Bitmap bmp;
 	boolean hole;//true if it is a hole
+	Context context;
 	
 	public enum DIR	{UP, DOWN, LEFT, RIGHT};
 	public enum SHAPE {RECTANGLE, CIRCLE, TRIANGLE_RIGHT, TRIANGLE_EQU,
 		ARROW, HEXAGON, OVAL, PENTAGON, RHOMBUS, SQUARE, STAR};
 	public enum COLOR {PURPLE, GREEN, RED, YELLOW, BLUE};
 	
-	public Shape(SHAPE shape, int x, int y, COLOR c, boolean hole)	{
+	public Shape(SHAPE shape, int x, int y, COLOR c, boolean hole, Context context)	{
 		this.hole = hole;
 		this.c = c;
+		this.context = context;
 		
 		switch(shape)	{
 		case RECTANGLE:
-			imgSrc = "rectangle.png";
+			//make rectangle later
 			break;
 		case CIRCLE:
-			imgSrc = "circle.png";
+			bmp = BitmapFactory.decodeResource(this.context.getResources(), R.drawable.circle_blue);
 			break;
 		case TRIANGLE_RIGHT:
-			imgSrc = "triangle_right.png";
+			bmp = BitmapFactory.decodeResource(this.context.getResources(), R.drawable.triangle_right_blue);
 			break;
 		case TRIANGLE_EQU:
-			imgSrc = "triangle_equal.png";
+			bmp = BitmapFactory.decodeResource(this.context.getResources(), R.drawable.triangle_equal_blue);
 			break;
 		case ARROW:
-			imgSrc = "arrow.png";
+			bmp = BitmapFactory.decodeResource(this.context.getResources(), R.drawable.arrow_blue);
 			break;
 		case HEXAGON:
-			imgSrc = "hexagon.png";
+			bmp = BitmapFactory.decodeResource(this.context.getResources(), R.drawable.hexagon_blue);
 			break;
 		case OVAL:
-			imgSrc = "oval.png";
+			bmp = BitmapFactory.decodeResource(this.context.getResources(), R.drawable.oval_blue);
 			break;
 		case PENTAGON:
-			imgSrc = "pentagon.png";
+			bmp = BitmapFactory.decodeResource(this.context.getResources(), R.drawable.pentagon_blue);
 			break;
 		case RHOMBUS:
-			imgSrc = "rhombus.png";
+			bmp = BitmapFactory.decodeResource(this.context.getResources(), R.drawable.rhombus_blue);
 			break;
 		case SQUARE:
-			imgSrc = "square.png";
+			bmp = BitmapFactory.decodeResource(this.context.getResources(), R.drawable.square_blue);
 			break;
 		case STAR:
-			imgSrc = "star.png";
+			bmp = BitmapFactory.decodeResource(this.context.getResources(), R.drawable.star_blue);
 			break;
 		}
 		
-		bmp = BitmapFactory.decodeFile(imgSrc);
 	}
 	
 	public int getDir() {
@@ -69,19 +72,19 @@ public class Shape {
 		this.dir = dir;
 	}
 
-	public int getPosX() {
+	public float getPosX() {
 		return posX;
 	}
 
-	public void setPosX(int posX) {
+	public void setPosX(float posX) {
 		this.posX = posX;
 	}
 
-	public int getPosY() {
+	public float getPosY() {
 		return posY;
 	}
 
-	public void setPosY(int posY) {
+	public void setPosY(float posY) {
 		this.posY = posY;
 	}
 
@@ -93,20 +96,20 @@ public class Shape {
 		this.c = c;
 	}
 
-	public String getImgSrc() {
-		return imgSrc;
-	}
-
-	public void setImgSrc(String imgSrc) {
-		this.imgSrc = imgSrc;
-	}
-
 	public boolean isHole() {
 		return hole;
 	}
 
 	public void setHole(boolean hole) {
 		this.hole = hole;
+	}
+
+	public Bitmap getBmp() {
+		return bmp;
+	}
+
+	public void setBmp(Bitmap bmp) {
+		this.bmp = bmp;
 	}
 	
 }
