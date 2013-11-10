@@ -32,8 +32,11 @@ public class Preferences extends Activity{
 		
 		musicToggle = (ToggleButton)findViewById(R.id.musicToggle);
 		if(player != null)
+		{
+
 			if(player.isPlaying())
 				musicToggle.setChecked(true);
+		}
 		musicToggle.setOnClickListener(new OnClickListener(){
 			
 			@Override

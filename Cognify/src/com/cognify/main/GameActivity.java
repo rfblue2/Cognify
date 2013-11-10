@@ -101,6 +101,8 @@ public class GameActivity extends Activity implements OnTouchListener {
 		currentLevel = extras.getInt("level");
 		levelLoader.loadLevel(currentLevel);
 		
+		
+		
 		switch(currentLevel)	{//for walkthrough
 		case 1:
 			Intent i = new Intent(this, Walkthrough.class);
