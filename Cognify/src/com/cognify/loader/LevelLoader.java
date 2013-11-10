@@ -41,6 +41,8 @@ public class LevelLoader {
 		   }
 		  } catch (IOException e1) {
 		   e1.printStackTrace();
+		  } finally {
+			  game.isInitialized = true;
 		  }
 		  
 	}
