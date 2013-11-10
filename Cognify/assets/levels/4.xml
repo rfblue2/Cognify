@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<level>
+	<shape>
+		<type>star</type>
+		<x>175</x>
+		<y>600</y>
+		<hole>true</hole>
+	</shape>
+
+	<shape>
+		<type>star</type>
+		 <x>575</x>
+		 <y>900</y>
+	</shape>
+	
+	<shape>
+		<type>oval</type>
+		<x>375</x>
+		<y>600</y>
+		<hole>true</hole>
+	</shape>
+
+	<shape>
+		<type>oval</type>
+		 <x>775</x>
+		 <y>900</y>
+	</shape>
+	
+	<shape>
+		<type>hexagon</type>
+		<x>575</x>
+		<y>600</y>
+		<hole>true</hole>
+	</shape>
+
+	<shape>
+		<type>hexagon</type>
+		 <x>175</x>
+		 <y>900</y>
+	</shape>
+	<shape>
+		<type>arrow</type>
+		<x>775</x>
+		<y>600</y>
+		<hole>true</hole>
+	</shape>
+	<shape>
+		<type>arrow</type>
+		 <x>375</x>
+		 <y>900</y>
+	</shape>
+</level>

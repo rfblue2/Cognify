@@ -3,33 +3,33 @@
 <level>
 	<shape>
 		<type>rectangle</type>
-		<x>250</x>
+		<x>350</x>
 		<y>600</y>
 		<hole>true</hole>
 	</shape>
 
 	<shape>
 		<type>rectangle</type>
-		 <x>450</x>
-		 <y>600</y>
+		 <x>500</x>
+		 <y>800</y>
 	</shape>
 	
 	<shape>
 		<type>circle</type>
-		<x>350</x>
-		<y>400</y>
+		<x>500</x>
+		<y>600</y>
 		<hole>true</hole>
 	</shape>
 
 	<shape>
 		<type>circle</type>
-		 <x>250</x>
-		 <y>600</y>
+		 <x>650</x>
+		 <y>800</y>
 	</shape>
 	
 	<shape>
 		<type>rhombus</type>
-		<x>450</x>
+		<x>650</x>
 		<y>600</y>
 		<hole>true</hole>
 	</shape>
@@ -37,7 +37,7 @@
 	<shape>
 		<type>rhombus</type>
 		 <x>350</x>
-		 <y>600</y>
+		 <y>800</y>
 	</shape>
 	
 </level>
