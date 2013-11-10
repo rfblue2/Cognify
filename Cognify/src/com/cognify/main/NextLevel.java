@@ -23,7 +23,7 @@ public class NextLevel extends Activity	implements View.OnClickListener	{
 		next = (Button) findViewById(R.id.bProceed);
 		scoreView = (TextView) findViewById(R.id.scDisplay);
 		Bundle extras = getIntent().getExtras();
-		scoreView.setText("Score: " + extras.getInt("displayscore"));
+		scoreView.setText("Score: " + extras.getInt("displayscore") + "\nHigh Score: " + extras.getInt("displayhighscore"));
 		next.setOnClickListener(this);
 	}
 
