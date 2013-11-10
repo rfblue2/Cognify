@@ -72,7 +72,7 @@ public class Shape {
 			break;
 		case PENTAGON:
 			bmp = BitmapFactory.decodeResource(this.context.getResources(), R.drawable.pentagon, opt);
-			changeColor(bmp, Color.RED);
+			changeColor(bmp, Color.MAGENTA);
 			break;
 		case RHOMBUS:
 			bmp = BitmapFactory.decodeResource(this.context.getResources(), R.drawable.rhombus, opt);
@@ -88,7 +88,7 @@ public class Shape {
 			break;
 		case TRAPEZOID:
 			bmp = BitmapFactory.decodeResource(this.context.getResources(), R.drawable.trapezoid, opt);
-			changeColor(bmp, Color.BLUE);
+			changeColor(bmp, Color.RED);
 			break;
 		case OCTAGON:
 			bmp = BitmapFactory.decodeResource(this.context.getResources(), R.drawable.octagon, opt);
@@ -98,10 +98,10 @@ public class Shape {
 		
 		
 		
-		if(hole)//Turns shape gray if it's a hole
+		/*if(hole)//Turns shape gray if it's a hole
 		{
 			changeColor(bmp, Color.GRAY);
-		}
+		}*/
 		
 		
 	}
@@ -119,6 +119,9 @@ public class Shape {
 		 Log.v("red", ""+red);
 		 Log.v("green", ""+green);
 		 Log.v("blue", ""+blue);
+		 
+		 if(hole)
+			 col = Color.GRAY;
 
 		 for(int i =0; i<bmp.getHeight()*bmp.getWidth();i++){
 			 
