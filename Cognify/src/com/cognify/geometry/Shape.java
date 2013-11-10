@@ -6,6 +6,10 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.ColorFilter;
+import android.graphics.LightingColorFilter;
+import android.graphics.Paint;
+import android.util.Log;
 
 public class Shape {
 	
@@ -15,10 +19,11 @@ public class Shape {
 	Bitmap bmp;
 	boolean hole;//true if it is a hole
 	Context context;
+	ColorFilter holeFilter;
 	
 	public enum DIR	{UP, DOWN, LEFT, RIGHT};
 	public enum SHAPE {RECTANGLE, CIRCLE, TRIANGLE_RIGHT, TRIANGLE_EQU,
-		ARROW, HEXAGON, OVAL, PENTAGON, RHOMBUS, SQUARE, STAR};
+		ARROW, HEXAGON, OVAL, PENTAGON, RHOMBUS, SQUARE, STAR, TRAPEZOID};
 	public enum COLOR {PURPLE, GREEN, RED, YELLOW, BLUE};
 	
 	public Shape(SHAPE shape, int x, int y, COLOR c, boolean hole, Context context)	{
@@ -29,15 +34,20 @@ public class Shape {
 		this.posX = x;
 		this.posY = y;
 		
+		 BitmapFactory.Options opt = new BitmapFactory.Options();
+		 opt.inMutable = true;
+		 
+		 
 		switch(shape)	{
 		case RECTANGLE:
-			//make rectangle later
+			bmp = BitmapFactory.decodeResource(this.context.getResources(), R.drawable.rectangle, opt);
+			Log.v("bitmap mutable first", ""+bmp.isMutable());
 			break;
 		case CIRCLE:
-			bmp = BitmapFactory.decodeResource(this.context.getResources(), R.drawable.circle);
+			bmp = BitmapFactory.decodeResource(this.context.getResources(), R.drawable.circle, opt);
 			break;
 		case TRIANGLE_RIGHT:
-			bmp = BitmapFactory.decodeResource(this.context.getResources(), R.drawable.triangle_right);
+			bmp = BitmapFactory.decodeResource(this.context.getResources(), R.drawable.triangle_right, opt);
 			break;
 		case TRIANGLE_EQU:
 			bmp = BitmapFactory.decodeResource(this.context.getResources(), R.drawable.triangle_equal);
@@ -58,12 +68,34 @@ public class Shape {
 			bmp = BitmapFactory.decodeResource(this.context.getResources(), R.drawable.rhombus);
 			break;
 		case SQUARE:
-			bmp = BitmapFactory.decodeResource(this.context.getResources(), R.drawable.square);
+			bmp = BitmapFactory.decodeResource(this.context.getResources(), R.drawable.square, opt);
 			break;
 		case STAR:
 			bmp = BitmapFactory.decodeResource(this.context.getResources(), R.drawable.star);
 			break;
+		case TRAPEZOID:
+			bmp = BitmapFactory.decodeResource(this.context.getResources(), R.drawable.trapezoid);
+			break;
 		}
+		
+		if(hole)//Turns shape gray if it's a hole
+		{
+			 int[] allpixels = new int [ bmp.getHeight()*bmp.getWidth()];
+	
+			 bmp.getPixels(allpixels, 0, bmp.getWidth(), 0, 0, bmp.getWidth(), bmp.getHeight());
+	
+			 for(int i =0; i<bmp.getHeight()*bmp.getWidth();i++){
+				 if(i%100==0)
+					 Log.v("color", ""+allpixels[i]);
+				 
+			     allpixels[i] = Color.GRAY;
+			
+			 	
+			  }
+			 
+			  bmp.setPixels(allpixels, 0, bmp.getWidth(), 0, 0, bmp.getWidth(), bmp.getHeight());
+		}
+		
 		
 	}
 	
