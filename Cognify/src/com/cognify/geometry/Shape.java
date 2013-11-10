@@ -31,34 +31,34 @@ public class Shape {
 			//make rectangle later
 			break;
 		case CIRCLE:
-			bmp = BitmapFactory.decodeResource(this.context.getResources(), R.drawable.circle_blue);
+			bmp = BitmapFactory.decodeResource(this.context.getResources(), R.drawable.circle);
 			break;
 		case TRIANGLE_RIGHT:
-			bmp = BitmapFactory.decodeResource(this.context.getResources(), R.drawable.triangle_right_blue);
+			bmp = BitmapFactory.decodeResource(this.context.getResources(), R.drawable.triangle_right);
 			break;
 		case TRIANGLE_EQU:
-			bmp = BitmapFactory.decodeResource(this.context.getResources(), R.drawable.triangle_equal_blue);
+			bmp = BitmapFactory.decodeResource(this.context.getResources(), R.drawable.triangle_equal);
 			break;
 		case ARROW:
-			bmp = BitmapFactory.decodeResource(this.context.getResources(), R.drawable.arrow_blue);
+			bmp = BitmapFactory.decodeResource(this.context.getResources(), R.drawable.arrow);
 			break;
 		case HEXAGON:
-			bmp = BitmapFactory.decodeResource(this.context.getResources(), R.drawable.hexagon_blue);
+			bmp = BitmapFactory.decodeResource(this.context.getResources(), R.drawable.hexagon);
 			break;
 		case OVAL:
-			bmp = BitmapFactory.decodeResource(this.context.getResources(), R.drawable.oval_blue);
+			bmp = BitmapFactory.decodeResource(this.context.getResources(), R.drawable.oval);
 			break;
 		case PENTAGON:
-			bmp = BitmapFactory.decodeResource(this.context.getResources(), R.drawable.pentagon_blue);
+			bmp = BitmapFactory.decodeResource(this.context.getResources(), R.drawable.pentagon);
 			break;
 		case RHOMBUS:
-			bmp = BitmapFactory.decodeResource(this.context.getResources(), R.drawable.rhombus_blue);
+			bmp = BitmapFactory.decodeResource(this.context.getResources(), R.drawable.rhombus);
 			break;
 		case SQUARE:
-			bmp = BitmapFactory.decodeResource(this.context.getResources(), R.drawable.square_blue);
+			bmp = BitmapFactory.decodeResource(this.context.getResources(), R.drawable.square);
 			break;
 		case STAR:
-			bmp = BitmapFactory.decodeResource(this.context.getResources(), R.drawable.star_blue);
+			bmp = BitmapFactory.decodeResource(this.context.getResources(), R.drawable.star);
 			break;
 		}
 		
