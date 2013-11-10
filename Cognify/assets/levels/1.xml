@@ -8,11 +8,11 @@
 		<y>600</y>
 		<hole>true</hole>
 	</shape>
-
 	<shape>
 		<type>square</type>
-		 <x>450</x>
-		 <y>750</y>
+		<x>327</x>
+		<y>400</y>
+		<hole>true</hole>
 	</shape>
 </level>
 
