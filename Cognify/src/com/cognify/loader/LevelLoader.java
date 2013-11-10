@@ -23,10 +23,12 @@ public class LevelLoader {
 	File xmlFile;
 	Context context;
 	AssetManager assetManager;
+	static GameActivity game;
 	
-	public LevelLoader(Context context)
+	public LevelLoader(GameActivity game)
 	{
-		this.context = context;
+		this.context = game.getApplicationContext();
+		this.game = game;
 		assetManager = context.getAssets(); 
 		 // To get names of all files inside the "Files" folder
 		  try {
@@ -64,8 +66,8 @@ public class LevelLoader {
 			e.printStackTrace();
 		}
 		
-		Intent i = new Intent(context, GameActivity.class);
-		context.startActivity(i);
+		//Intent i = new Intent(context, GameActivity.class);
+		//context.startActivity(i);
 	}
 	
 	public List parse(InputStream in) throws XmlPullParserException, IOException{
@@ -129,9 +131,10 @@ public class LevelLoader {
 				skip(parser);
 			
 		}
-		
-		return new Shape(SHAPE.SQUARE, x, y, Shape.COLOR.BLUE, false, context);
-		
+		Shape tempShape = new Shape(SHAPE.SQUARE, x, y, Shape.COLOR.BLUE, false, context);
+		Log.v("msg", "SHAPE X: "+tempShape.getPosX()); 
+		game.drawShapes(tempShape);
+		return tempShape;
 		
 	}
 	

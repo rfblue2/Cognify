@@ -26,6 +26,9 @@ public class Shape {
 		this.c = c;
 		this.context = context;
 		
+		this.posX = x;
+		this.posY = y;
+		
 		switch(shape)	{
 		case RECTANGLE:
 			//make rectangle later
