@@ -35,10 +35,11 @@ public final class R {
         public static final int triangle_right_blue=0x7f02000b;
     }
     public static final class id {
-        public static final int action_settings=0x7f080005;
+        public static final int action_settings=0x7f080006;
         public static final int bAbout=0x7f080004;
         public static final int bPlay=0x7f080002;
         public static final int bPrefs=0x7f080003;
+        public static final int svGame=0x7f080005;
         public static final int textView1=0x7f080000;
         public static final int tvTitle=0x7f080001;
     }
