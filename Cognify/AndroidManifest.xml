@@ -33,8 +33,13 @@
         </activity>
         
         <activity
-            android:name="com.cognify.main.LevelMenu">
-            
+            android:name="com.cognify.main.LevelMenu">            
+        </activity>
+        
+        <activity
+            android:name="com.cognify.main.Preferences"
+             android:theme="@android:style/Theme.Dialog"
+            >            
         </activity>
         
         <activity
