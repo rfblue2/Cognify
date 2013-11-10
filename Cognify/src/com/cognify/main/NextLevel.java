@@ -7,17 +7,23 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class NextLevel extends Activity	implements View.OnClickListener	{
 
 	Button next;
+	TextView scoreView;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.next_level);
+		
 		next = (Button) findViewById(R.id.bProceed);
+		scoreView = (TextView) findViewById(R.id.scDisplay);
+		Bundle extras = getIntent().getExtras();
+		scoreView.setText("Score: " + extras.getInt("displayscore"));
 		next.setOnClickListener(this);
 	}
 

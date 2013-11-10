@@ -32,6 +32,9 @@ public class GameActivity extends Activity implements OnTouchListener {
 	private ArrayList<Shape> onlyHoles;
 	int currentLevel;
 	LevelLoader levelLoader;
+	private long startTime;
+	private long elapsed;
+	private int score;
 	
 	MediaPlayer placed;
 	MediaPlayer finished;
@@ -72,6 +75,7 @@ public class GameActivity extends Activity implements OnTouchListener {
 		
 		placed = MediaPlayer.create(GameActivity.this, R.raw.place_shape);
 		finished = MediaPlayer.create(GameActivity.this, R.raw.finish_level);
+		startTime = System.currentTimeMillis();
 		
 		finishedLevels = new boolean[40];
 		for(int i = 0; i < 40; i++)	{//Hardcoded # of levels
@@ -141,6 +145,7 @@ public class GameActivity extends Activity implements OnTouchListener {
 		bitmapBounds.clear();
 		scale.clear();
 		angle.clear();
+		startTime = System.currentTimeMillis();
 	}
 
 	public void nextLevel() {
@@ -163,6 +168,7 @@ public class GameActivity extends Activity implements OnTouchListener {
 			if (!holeClear.get(x))
 				return false;
 		}
+		score = (int) elapsed;
 		return true;
 	}
 
@@ -200,6 +206,12 @@ public class GameActivity extends Activity implements OnTouchListener {
 
 				Canvas c = holder.lockCanvas();
 				c.drawARGB(255, 255, 255, 204);
+				
+				Paint time = new Paint();
+				time.setTextSize(70);
+				elapsed = 30-((System.currentTimeMillis() - startTime)/1000);
+				
+				c.drawText("Countdown: " + elapsed, 10, 60, time);
 				for (int n = 0; n < shapes.size(); n++) {
 
 					Paint paint = new Paint();
@@ -254,7 +266,7 @@ public class GameActivity extends Activity implements OnTouchListener {
 				holder.unlockCanvasAndPost(c);
 				if (checkCompletion()) {
 					valid = false;
-					Log.v("COMPLETION", "Completed level: "+currentLevel);
+					Log.v("COMPLETION", "Completed level: "+currentLevel + " Score: "+score);
 					finished.start();
 					finishedLevels[currentLevel - 1] = true;
 					Intent p = new Intent();
@@ -263,6 +275,7 @@ public class GameActivity extends Activity implements OnTouchListener {
 					p.putExtras(info);
 					setResult(RESULT_OK, p);
 					Intent j = new Intent(context, NextLevel.class);
+					j.putExtra("displayscore", score);
 					startActivityForResult(j, 0);
 					//nextLevel();
 				}
