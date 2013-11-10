@@ -8,6 +8,9 @@ import com.cognify.loader.LevelLoader;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.LightingColorFilter;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
@@ -53,13 +56,16 @@ public class GameActivity extends Activity implements OnTouchListener {
 		@Override
 		public void run() {
 			while(valid)	{
+				/*Paint holeColor = new Paint(Color.LTGRAY);
+				LightingColorFilter holeFilter = new LightingColorFilter(Color.RED, 1);
+				holeColor.setColorFilter(holeFilter);*/
 				//draw
 				if(!holder.getSurface().isValid())	{
-					continue;
+					continue; 
 				}
 				
 				Canvas c = holder.lockCanvas();
-				c.drawARGB(255, 150, 150, 10);
+				c.drawARGB(255, 255, 255, 204);
 				for(int n = 0; n < shapes.size(); n++)	{
 					c.drawBitmap(shapes.get(n).getBmp(), shapes.get(n).getPosX(), shapes.get(n).getPosY(), null);
 				}
