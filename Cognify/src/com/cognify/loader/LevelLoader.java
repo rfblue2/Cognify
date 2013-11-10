@@ -20,11 +20,12 @@ import android.util.Xml;
 public class LevelLoader {
 	File xmlFile;
 	Context context;
+	AssetManager assetManager;
 	
 	public LevelLoader(Context context)
 	{
 		this.context = context;
-		AssetManager assetManager = context.getAssets(); 
+		assetManager = context.getAssets(); 
 		 // To get names of all files inside the "Files" folder
 		  try {
 		   String[] files = assetManager.list("levels");
@@ -38,7 +39,7 @@ public class LevelLoader {
 		   e1.printStackTrace();
 		  }
 		  
-		  
+		/*  
 		try {
 			this.parse(assetManager.open("levels/test.xml"));
 		} catch (XmlPullParserException e) {
@@ -47,8 +48,21 @@ public class LevelLoader {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}*/
+	}
+	
+	public void loadLevel(int num){
+		try {
+			this.parse(assetManager.open("levels/"+num+".xml"));
+		} catch (XmlPullParserException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
+	
 	public List parse(InputStream in) throws XmlPullParserException, IOException{
 		Log.v("parser", "started");
 		try{
