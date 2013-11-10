@@ -1,17 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <level>
-	<shape>
-		<type>octagon</type>
-		<x>75</x>
-		<y>600</y>
-		<hole>true</hole>
-	</shape>
 
-	<shape>
-		<type>octagon</type>
-		 <x>475</x>
-		 <y>900</y>
-	</shape>
 	
 	<shape>
 		<type>triangle_right</type>
@@ -38,17 +27,7 @@
 		 <x>675</x>
 		 <y>900</y>
 	</shape>
-	<shape>
-		<type>trapezoid</type>
-		<x>675</x>
-		<y>600</y>
-		<hole>true</hole>
-	</shape>
-	<shape>
-		<type>trapezoid</type>
-		 <x>75</x>
-		 <y>900</y>
-	</shape>
+
 	<shape>
 		<type>triangle_equal</type>
 		<x>875</x>

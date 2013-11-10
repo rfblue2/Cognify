@@ -48,7 +48,7 @@ public class Shape {
 			break;
 		case CIRCLE:
 			bmp = BitmapFactory.decodeResource(this.context.getResources(), R.drawable.circle, opt);
-			changeColor(bmp, Color.GREEN);
+			changeColor(bmp, Color.rgb(186, 101, 186));//purple
 			break;
 		case TRIANGLE_RIGHT:
 			bmp = BitmapFactory.decodeResource(this.context.getResources(), R.drawable.triangle_right, opt);

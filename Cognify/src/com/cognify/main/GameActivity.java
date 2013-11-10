@@ -257,7 +257,9 @@ public class GameActivity extends Activity implements OnTouchListener {
 					startActivityForResult(j, 0);
 					//nextLevel();
 				}
+				//c.restore();
 			}
+			
 		}
 
 		public void pause() {
