@@ -58,11 +58,12 @@ public class MainActivity extends Activity implements View.OnClickListener {
 			startActivity(menuLevelIntent);
 			break;
 		case R.id.bPrefs: 
-			
+			Intent prefIntent = new Intent(this, Preferences.class);
+			startActivity(prefIntent);
 			break;
 		case R.id.bAbout:
-			Intent i = new Intent("com.cognify.main.ABOUT");
-			startActivity(i);
+			Intent aboutIntent = new Intent("com.cognify.main.ABOUT");
+			startActivity(aboutIntent);
 			break;
 		}
 		
