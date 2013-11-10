@@ -16,6 +16,7 @@ import android.graphics.LightingColorFilter;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -31,6 +32,9 @@ public class GameActivity extends Activity implements OnTouchListener {
 	private ArrayList<Shape> onlyHoles;
 	int currentLevel;
 	LevelLoader levelLoader;
+	
+	MediaPlayer placed;
+	MediaPlayer finished;
 
 	public boolean finishedLevels[];//there are 40 levels
 	
@@ -65,6 +69,9 @@ public class GameActivity extends Activity implements OnTouchListener {
 		sv = new MySurfaceView(this);
 		sv.setOnTouchListener(this);
 		setContentView(sv);
+		
+		placed = MediaPlayer.create(GameActivity.this, R.raw.place_shape);
+		finished = MediaPlayer.create(GameActivity.this, R.raw.finish_level);
 		
 		finishedLevels = new boolean[40];
 		for(int i = 0; i < 40; i++)	{//Hardcoded # of levels
@@ -218,6 +225,7 @@ public class GameActivity extends Activity implements OnTouchListener {
 									shapes.get(y).getPosX() - onlyHoles.get(x).getPosX() >= -25 && 
 									shapes.get(y).getPosY() - onlyHoles.get(x).getPosY() <= 25 &&
 									shapes.get(y).getPosY() - onlyHoles.get(x).getPosY() >= -25) {
+									//placed.start();
 									holeClear.set(x, true);
 									transform.get(y).reset();
 									transform.get(y).postTranslate(onlyHoles.get(x).getPosX(), onlyHoles.get(x).getPosY());
@@ -247,6 +255,7 @@ public class GameActivity extends Activity implements OnTouchListener {
 				if (checkCompletion()) {
 					valid = false;
 					Log.v("COMPLETION", "Completed level: "+currentLevel);
+					finished.start();
 					finishedLevels[currentLevel - 1] = true;
 					Intent p = new Intent();
 					Bundle info = new Bundle();
