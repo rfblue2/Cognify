@@ -63,6 +63,11 @@
             android:name="com.cognify.main.GameActivity">
         </activity>
         
+        <activity
+            android:name="com.cognify.main.Walkthrough"
+            android:theme="@android:style/Theme.Dialog">
+        </activity>
+        
     </application>
 
 </manifest>
