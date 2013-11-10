@@ -39,79 +39,98 @@ public class Shape {
 		 BitmapFactory.Options opt = new BitmapFactory.Options();
 		 opt.inMutable = true;
 		 
+		 int[] allpixels;
 		 
 		switch(shape)	{
 		case RECTANGLE:
 			bmp = BitmapFactory.decodeResource(this.context.getResources(), R.drawable.rectangle, opt);
+			changeColor(bmp, Color.RED);
 			break;
 		case CIRCLE:
 			bmp = BitmapFactory.decodeResource(this.context.getResources(), R.drawable.circle, opt);
+			changeColor(bmp, Color.GREEN);
 			break;
 		case TRIANGLE_RIGHT:
 			bmp = BitmapFactory.decodeResource(this.context.getResources(), R.drawable.triangle_right, opt);
+			changeColor(bmp, Color.CYAN);
 			break;
 		case TRIANGLE_EQU:
 			bmp = BitmapFactory.decodeResource(this.context.getResources(), R.drawable.triangle_equal, opt);
+			changeColor(bmp, Color.BLUE);
 			break;
 		case ARROW:
 			bmp = BitmapFactory.decodeResource(this.context.getResources(), R.drawable.arrow, opt);
+			changeColor(bmp, Color.YELLOW);
 			break;
 		case HEXAGON:
 			bmp = BitmapFactory.decodeResource(this.context.getResources(), R.drawable.hexagon, opt);
+			changeColor(bmp, Color.BLACK);
 			break;
 		case OVAL:
 			bmp = BitmapFactory.decodeResource(this.context.getResources(), R.drawable.oval, opt);
+			changeColor(bmp, Color.WHITE);
 			break;
 		case PENTAGON:
 			bmp = BitmapFactory.decodeResource(this.context.getResources(), R.drawable.pentagon, opt);
+			changeColor(bmp, Color.RED);
 			break;
 		case RHOMBUS:
 			bmp = BitmapFactory.decodeResource(this.context.getResources(), R.drawable.rhombus, opt);
+			changeColor(bmp, Color.MAGENTA);
 			break;
 		case SQUARE:
 			bmp = BitmapFactory.decodeResource(this.context.getResources(), R.drawable.square, opt);
+			changeColor(bmp, Color.GREEN);
 			break;
 		case STAR:
 			bmp = BitmapFactory.decodeResource(this.context.getResources(), R.drawable.star, opt);
-			Log.v("created star", ""+R.drawable.star);
+			changeColor(bmp, Color.CYAN);
 			break;
 		case TRAPEZOID:
 			bmp = BitmapFactory.decodeResource(this.context.getResources(), R.drawable.trapezoid, opt);
+			changeColor(bmp, Color.BLUE);
 			break;
 		case OCTAGON:
 			bmp = BitmapFactory.decodeResource(this.context.getResources(), R.drawable.octagon, opt);
+			changeColor(bmp, Color.BLACK);
 			break;
 		}
 		
+		
+		
 		if(hole)//Turns shape gray if it's a hole
 		{
-			int currentC = Color.rgb(63, 72, 204);//present blue color
-			Log.v("hole true", "making gray");
-			 int[] allpixels = new int [bmp.getHeight()*bmp.getWidth()];
-	
-			 bmp.getPixels(allpixels, 0, bmp.getWidth(), 0, 0, bmp.getWidth(), bmp.getHeight());
-			 
-			 int red = Color.red(bmp.getPixel(20, 20));
-			 int green = Color.green(bmp.getPixel(20, 20));
-			 int blue = Color.blue(bmp.getPixel(20, 20));
-			 
-			 Log.v("red", ""+red);
-			 Log.v("green", ""+green);
-			 Log.v("blue", ""+blue);
-	
-			 for(int i =0; i<bmp.getHeight()*bmp.getWidth();i++){
-				 
-				 if(allpixels[i] == currentC)
-					 allpixels[i] = Color.GRAY;
-					 	
-			  }
-			 
-			  bmp.setPixels(allpixels, 0, bmp.getWidth(), 0, 0, bmp.getWidth(), bmp.getHeight());
-		 }
+			changeColor(bmp, Color.GRAY);
+		}
 		
 		
 	}
 	
+	public void changeColor(Bitmap src, int col){
+		int currentC = Color.rgb(63, 72, 204);//present blue color
+		int[] allpixels = new int [bmp.getHeight()*bmp.getWidth()];
+
+		 bmp.getPixels(allpixels, 0, bmp.getWidth(), 0, 0, bmp.getWidth(), bmp.getHeight());
+		 
+		 int red = Color.red(bmp.getPixel(20, 20));
+		 int green = Color.green(bmp.getPixel(20, 20));
+		 int blue = Color.blue(bmp.getPixel(20, 20));
+		 
+		 Log.v("red", ""+red);
+		 Log.v("green", ""+green);
+		 Log.v("blue", ""+blue);
+
+		 for(int i =0; i<bmp.getHeight()*bmp.getWidth();i++){
+			 
+			 if(allpixels[i] == currentC)
+				 allpixels[i] = col;
+				 	
+		  }
+		 
+		  bmp.setPixels(allpixels, 0, bmp.getWidth(), 0, 0, bmp.getWidth(), bmp.getHeight());
+	 }
+	
+		
 	public SHAPE getShape(){
 		return shape;
 	}
