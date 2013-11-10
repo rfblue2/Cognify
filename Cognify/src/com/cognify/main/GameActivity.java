@@ -40,6 +40,7 @@ public class GameActivity extends Activity implements OnTouchListener {
 	MediaPlayer finished;
 
 	public boolean finishedLevels[];//there are 40 levels
+	public Integer highScores[];
 	
 	int activeShapeIndex = 0;
 	private TouchManager touchManager = new TouchManager(2);
@@ -81,6 +82,11 @@ public class GameActivity extends Activity implements OnTouchListener {
 		for(int i = 0; i < 40; i++)	{//Hardcoded # of levels
 			finishedLevels[i] = false;
 		}
+		highScores = new Integer[40];
+		for(int i = 0; i < 40; i++) {
+			highScores[i] = 0;
+		}
+		
 		shapes = new ArrayList<Shape>();
 		onlyHoles = new ArrayList<Shape>();
 		position = new ArrayList<Vector2D>();
@@ -212,6 +218,11 @@ public class GameActivity extends Activity implements OnTouchListener {
 				Paint time = new Paint();
 				time.setTextSize(70);
 				elapsed = 30-((System.currentTimeMillis() - startTime)/1000);
+				if(30-((System.currentTimeMillis() - startTime)/1000) < 0) {
+					elapsed = 0;
+				} else {
+					elapsed = 30-((System.currentTimeMillis() - startTime)/1000);
+				}
 				
 				c.drawText("Countdown: " + elapsed, 10, 60, time);
 				for (int n = 0; n < shapes.size(); n++) {
@@ -271,6 +282,9 @@ public class GameActivity extends Activity implements OnTouchListener {
 					Log.v("COMPLETION", "Completed level: "+currentLevel + " Score: "+score);
 					finished.start();
 					finishedLevels[currentLevel - 1] = true;
+					if(highScores[currentLevel - 1] < score) {
+						highScores[currentLevel - 1] = score;
+					}
 					Intent p = new Intent();
 					Bundle info = new Bundle();
 					info.putBooleanArray("finished", finishedLevels);
@@ -278,6 +292,7 @@ public class GameActivity extends Activity implements OnTouchListener {
 					setResult(RESULT_OK, p);
 					Intent j = new Intent(context, NextLevel.class);
 					j.putExtra("displayscore", score);
+					j.putExtra("displayhighscore", highScores[currentLevel - 1]);
 					startActivityForResult(j, 0);
 					//nextLevel();
 				}
