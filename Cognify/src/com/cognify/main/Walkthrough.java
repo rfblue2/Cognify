@@ -21,9 +21,7 @@ public class Walkthrough extends Activity	{
 		
 		switch(level)	{
 		case 1:
-			txt.setText("Welcome to Cognify, the game beyond cognition." +
-					"  Your objective is to move the shapes into their respective holes." +
-					"  Drag the blue square into the corresponding gray hole.");
+			txt.setText("Drag the square into the gray space.");
 			break;
 		}
 	}
