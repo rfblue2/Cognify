@@ -12,6 +12,7 @@ import android.graphics.Color;
 import android.graphics.LightingColorFilter;
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -31,7 +32,7 @@ public class GameActivity extends Activity implements OnTouchListener {
 		setContentView(sv);
 		
 		shapes = new ArrayList<Shape>();
-
+  
 		LevelLoader levelLoader = new LevelLoader(this);
 		Bundle extras = getIntent().getExtras();
 		levelLoader.loadLevel(extras.getInt("level"));
@@ -39,6 +40,7 @@ public class GameActivity extends Activity implements OnTouchListener {
 	
 	public void drawShapes(Shape s)	{
 		shapes.add(s);
+		
 	}
 
 	public class MySurfaceView extends SurfaceView implements Runnable	{
@@ -67,6 +69,7 @@ public class GameActivity extends Activity implements OnTouchListener {
 				Canvas c = holder.lockCanvas();
 				c.drawARGB(255, 255, 255, 204);
 				for(int n = 0; n < shapes.size(); n++)	{
+					 
 					c.drawBitmap(shapes.get(n).getBmp(), shapes.get(n).getPosX(), shapes.get(n).getPosY(), null);
 				}
 				holder.unlockCanvasAndPost(c);
