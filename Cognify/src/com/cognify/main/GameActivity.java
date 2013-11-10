@@ -22,6 +22,8 @@ public class GameActivity extends Activity implements OnTouchListener {
 
 	MySurfaceView sv;
 	ArrayList<Shape> shapes;
+	int currentLevel;
+	LevelLoader levelLoader;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -32,15 +34,26 @@ public class GameActivity extends Activity implements OnTouchListener {
 		
 		shapes = new ArrayList<Shape>();
 
-		LevelLoader levelLoader = new LevelLoader(this);
+		levelLoader = new LevelLoader(this);
 		Bundle extras = getIntent().getExtras();
-		levelLoader.loadLevel(extras.getInt("level"));
+		currentLevel = extras.getInt("level");
+		levelLoader.loadLevel(currentLevel);
 	}
 	
 	public void drawShapes(Shape s)	{
 		shapes.add(s);
 	}
+	
+	public void nextLevel()	{
+		shapes.clear();
+		levelLoader.loadLevel(++currentLevel);
+	}
 
+	public void previousLevel()	{
+		shapes.clear();
+		levelLoader.loadLevel(--currentLevel);
+	}
+	
 	public class MySurfaceView extends SurfaceView implements Runnable	{
 
 		Thread t = null;
